@@ -76,12 +76,9 @@ namespace test1.Controllers
                 //return "MSSV: " + mssv + "; Họ tên: " + hoten + "; Mật khẩu: " + mk;
 
             }
-           // }
+        // }
 
-
-        }
-
-        public string get_sp_Edit()
+        public string Edit()
         {
             int Id;
             if (int.TryParse(Request["id"], out Id))
@@ -122,11 +119,11 @@ namespace test1.Controllers
             }
 
 
-            
+
         }
 
 
-        public string get_All()
+        public string Get_All()
         {
             APIResult_ett<List<Product>> rs = new APIResult_ett<List<Product>>();
             try
@@ -158,4 +155,5 @@ namespace test1.Controllers
             return JsonConvert.SerializeObject(rs);
         }
     }
+
 }
