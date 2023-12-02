@@ -37,6 +37,15 @@ namespace test1.Controllers
         {
             return View();
         }
+        public ActionResult addcategories()
+        {
+            return View();
+        }
+        public ActionResult editcategories()
+        {
+            return View();
+        }
+
 
         public string Add()
         {
@@ -110,7 +119,7 @@ namespace test1.Controllers
                 }
                 else
                 {
-                    return "Mày chơi tao không được đâu";
+                    return "Invalid input";
                 }
             }
             else
@@ -132,7 +141,7 @@ namespace test1.Controllers
                 var qr = db.Products;
                 if (qr.Any())
                 {
-                    //có dữ liệu => chính là dssv
+                    //có dữ liệu => chính là dssp
                     rs.ErrCode = EnumErrCode.Success;
                     rs.ErrDesc = "Lấy DSSP thành công";
                     rs.Data = qr.ToList();
