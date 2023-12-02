@@ -13,7 +13,7 @@
                 <div class="row">
                     <div class="col-sm-6 text-left">
                         <h5 class="card-category">Dashboard</h5>
-                        <h2 class="card-title">Adding Products</h2>
+                        <h2 class="card-title">Editing Product</h2>
                     </div>
                 </div>
             </div>
@@ -38,7 +38,7 @@
                         <div class="text-input">
                             <label for="p-image" class="text-label">Image's URL:</label>
                             <input type="text" class="text-field" placeholder="https://photos.google.com/photo/...."
-                                   name="p-image" id='p-image' required />
+                                   name="p-image" id='p-image' required readonly/>
                         </div>
                         <div class="text-input">
                             <label for="p-name" class="text-label">Product's name:</label>
@@ -54,7 +54,7 @@
                             <textarea class="text-field" rows="10" placeholder="This product will bring about....."
                                       name="p-desc" id='p-desc' required></textarea>
                         </div>
-                        <input class="submit-btn" type="submit" value="Submit product's information">
+                        <input class="submit-btn" type="submit" value="Edit product's information">
                     </div>
 
                 </form>
@@ -96,29 +96,70 @@
 </script>
 
 <script>
-    $(document).ready(function () {
-        $(".submit-btn").click(function (e) {
-            e.preventDefault()
-            var form = $('#product-form')[0];
-            var formData = new FormData(form);
 
+    $(document).ready(function () {
+        var url = new URL(window.location.href);
+        var productID = url.searchParams.get("p-id");
+
+        //trường hợp không rỗng
+        var formData = new FormData();
+        formData.append("productID", productID);
+
+        $.ajax(
+            {
+                type: "POST",
+                data: formData,
+                contentType: "application/json; charset=utf-8",
+                url: window.location.origin + '/Admin/get_SP_Info',
+                processData: false,
+                contentType: false,
+                cache: false,
+                success: function (response) {
+                    var data = JSON.parse(response);
+                    $("#p-image").val(data.URL);
+                    $("#p-name").val(data.NameProduct);
+                    $("#p-price").val(data.Price);
+                    $("#p-desc").val(data.Description);
+                    document.getElementById('start').classList.add("hidden");
+                    document.getElementById('notimage').classList.add("hidden");
+                    document.getElementById('file-image').classList.remove("hidden");
+                    document.getElementById("file-image").src = data.URL;
+                    
+                },
+                error: function (response) {
+                    alert("Xử lý lấy thông tin sinh viên cần sửa thất bại");
+                }
+            }
+        );
+    })
+</script>
+
+<script>
+    $(".submit-btn").click(function (e) {
+        e.preventDefault();
+        var url = new URL(window.location.href);
+        var productID = url.searchParams.get("p-id");
+
+        var form = $('#product-form')[0];
+        var formData = new FormData(form);
+        formData.append("p-id", productID);
             $.ajax(
                 {
                     type: "POST",
                     data: formData,
                     contentType: "application/json; charset=utf-8",
-                    url: window.location.origin + '/Admin/Add',
+                    url: window.location.origin + '/Admin/Edit',
                     processData: false,
                     contentType: false,
                     cache: false,
                     success: function (response) {
                         alert(response);
+                        window.location = "productviews";
                     },
                     error: function (response) {
-                        alert("Xử lý thêm mới thất bại");
+                        alert("Xử lý cập nhật thông tin sv thất bại");
                     }
                 }
-            )
-        })
+            );
     })
 </script>
