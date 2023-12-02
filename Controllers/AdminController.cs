@@ -33,19 +33,10 @@ namespace test1.Controllers
         {
             return View();
         }
-        public ActionResult editproducts()
+        public ActionResult editproduct()
         {
             return View();
         }
-        public ActionResult addcategories()
-        {
-            return View();
-        }
-        public ActionResult editcategories()
-        {
-            return View();
-        }
-
 
         public string Add()
         {
@@ -56,19 +47,17 @@ namespace test1.Controllers
             string URL = Request["p-image"];
             string prdname = Request["p-name"];
             string price = Request["p-price"];
-            string categoryID = Request["p-categoryID"];
             string desc = Request["p-desc"];
 
-            //validate input   
+          
+            if (!string.IsNullOrEmpty(URL) && !string.IsNullOrEmpty(prdname) && !string.IsNullOrEmpty(price) && !string.IsNullOrEmpty(desc))
+            {    
                     try
                     {
                         //trường hợp muốn insert
                         Product prd = new Product();
                         prd.URL = URL;
                         prd.NameProduct = prdname;
-                        prd.CategoryID = int.Parse(categoryID);
-                        prd.isDelete = true;
-                        prd.ShowOnHomePage = true;
                         prd.Price = double.Parse(price);
                         prd.Description = desc;
 
@@ -81,58 +70,65 @@ namespace test1.Controllers
                     {
                         return "Thêm mới sản phẩm thất bại. Chi tiết lỗi: " + ex.Message;
                     }
-                //ok
-                //return "MSSV: " + mssv + "; Họ tên: " + hoten + "; Mật khẩu: " + mk;
+                
 
-            }
-        // }
-
-        public string Edit()
-        {
-            int Id;
-            if (int.TryParse(Request["id"], out Id))
-            {
-                // Rest of your code
-                //validate input
-                if (Id != 0)
-                {
-                    try
-                    {
-                        //trường hợp muốn update
-                        var qrs = db.Products.Where(o => o.ID == Id);
-                        if (qrs.Any())
-                        {
-                            //có trả về bản ghi.
-                            Product prd = qrs.SingleOrDefault();
-
-                            return JsonConvert.SerializeObject(prd);
-                        }
-                        else
-                        {
-                            return "KHÔNG tìm thấy sp có ID = " + Id;
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        return "Cập nhật thông tin SP thất bại. Chi tiết lỗi: " + ex.Message;
-                    }
-                }
-                else
-                {
-                    return "Invalid input";
-                }
             }
             else
             {
-                return "Invalid ID";
+                return "Mày chơi tao không được đâu";
             }
-
 
 
         }
 
+        public string Edit()
+        {
 
-        public string Get_All()
+            string id = Request["p-id"];
+            string URL = Request["p-image"];
+            string prdname = Request["p-name"];
+            string price = Request["p-price"];
+            string desc = Request["p-desc"];
+            int productIntID = int.Parse(id);
+
+
+            if (!string.IsNullOrEmpty(URL) && !string.IsNullOrEmpty(prdname) && !string.IsNullOrEmpty(price) && !string.IsNullOrEmpty(desc))
+            {
+                try
+                {
+                    var qrs = db.Products.Where(o => o.ID == productIntID);
+                    if (qrs.Any())
+                    {
+                        //có trả về bản ghi.
+                        Product sp = qrs.SingleOrDefault();
+                        sp.URL = URL;
+                        sp.NameProduct = prdname;
+                        sp.Price = double.Parse(price);
+                        sp.Description = desc;
+
+                        db.SubmitChanges();
+
+                        return "Cập nhật thông tin sinh viên thành công";
+                    } else
+                    {
+                        return "Khong tim thay sp";
+                    }
+                }
+                catch (Exception ex)
+                {
+                    return "Thêm mới sản phẩm thất bại. Chi tiết lỗi: " + ex.Message;
+                }
+
+            }
+            else
+            {
+                return "Mày chơi tao không được đâu";
+            }
+
+
+        }
+
+        public string get_All()
         {
             APIResult_ett<List<Product>> rs = new APIResult_ett<List<Product>>();
             try
@@ -141,7 +137,7 @@ namespace test1.Controllers
                 var qr = db.Products;
                 if (qr.Any())
                 {
-                    //có dữ liệu => chính là dssp
+                    //có dữ liệu => chính là dssv
                     rs.ErrCode = EnumErrCode.Success;
                     rs.ErrDesc = "Lấy DSSP thành công";
                     rs.Data = qr.ToList();
@@ -163,6 +159,30 @@ namespace test1.Controllers
 
             return JsonConvert.SerializeObject(rs);
         }
-    }
 
+        public string get_SP_Info()
+        {
+            string productID = Request["productID"];
+            int productIntID = int.Parse(productID);
+                try
+                {
+                    var qr = db.Products.Where(o => o.ID == productIntID);
+                    if (qr.Any())
+                    {
+                        var sp_obj = qr.SingleOrDefault();
+
+                        return JsonConvert.SerializeObject(sp_obj);
+                    }
+                    else
+                    {
+                        return "Không tìm thấy SP có ID=" + productID;
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    return "Lấy thông tin sinh viên thất bại. Chi tiết lỗi: " + ex.Message;
+                }
+        }
+    }
 }
