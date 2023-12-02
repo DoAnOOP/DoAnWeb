@@ -5,7 +5,7 @@ function ekUpload() {
 
         console.log("Upload Initialised");
 
-        var fileSelect = document.getElementById('file-upload')
+        var fileSelect = document.getElementById("file-upload")
         fileSelect.addEventListener('change', fileSelectHandler, false);
     }
 
