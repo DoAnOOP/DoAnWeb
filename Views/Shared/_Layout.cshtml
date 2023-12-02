@@ -31,11 +31,12 @@
     <link href="~/Content/assets/css/nucleo-icons.css" rel="stylesheet" />
     <!-- CSS Files -->
     <link href="~/Content/assets/css/black-dashboard.css?v=1.0.0" rel="stylesheet" />
+    <link href="~/Content/assets/css/black-dashboard.css" rel="stylesheet" />
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link href="~/Content/assets/demo/demo.css" rel="stylesheet" />
 </head>
 
-<body class="">
+<body class="white-content">
     <div class="wrapper">
         <div class="sidebar">
             <!--
@@ -70,27 +71,9 @@
                         </a>
                     </li>
                     <li>
-                        <a href="~/Admin/editproducts">
-                            <i class="tim-icons icon-cart"></i>
-                            <p>Edit Products</p>
-                        </a>
-                    </li>
-                    <li>
                         <a href="~/Admin/productviews">
                             <i class="tim-icons icon-cart"></i>
                             <p>View Products</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="~/Admin/addcategories">
-                            <i class="tim-icons icon-puzzle-10"></i>
-                            <p>Adding Categories</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="~/Admin/editcategories">
-                            <i class="tim-icons icon-cart"></i>
-                            <p>Edit Categories</p>
                         </a>
                     </li>
                 </ul>
@@ -238,10 +221,6 @@
     <script src="~/Content/assets/js/core/jquery.min.js"></script>
     <script src="~/Content/assets/js/core/popper.min.js"></script>
     <script src="~/Content/assets/js/core/bootstrap.min.js"></script>
-    <script src="~/Content/assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
-    <!--  Google Maps Plugin    -->
-    <!-- Place this tag in your head or just before your close body tag. -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
     <!-- Chart JS -->
     <script src="~/Content/assets/js/plugins/chartjs.min.js"></script>
     <!--  Notifications Plugin    -->
@@ -249,7 +228,6 @@
     <!-- Control Center for Black Dashboard: parallax effects, scripts for the example pages etc -->
     <script src="~/Content/assets/js/black-dashboard.min.js?v=1.0.0"></script><!-- Black Dashboard DEMO methods, don't include it in your project! -->
     <script src="~/Content/assets/demo/demo.js"></script>
-    <script src="~/Content/assets/js/uploader.js"></script>
     <script>
         $(document).ready(function () {
             $().ready(function () {
@@ -374,54 +352,7 @@
                 application: "black-dashboard-free"
             });</script>
 
-    <script>
-        $(document).ready(function () {
-            $("#btn_them").click(function () {
-                
-                console.log("Hello")
-
-                ////kỹ thuật validate input requiment phía view
-                //var input_require = $(".require");
-                //var is_require_all = true;
-                //for (i = 0; i < input_require.length; i++) {
-                //    if (!$(input_require[i]).val()) {
-                //        is_require_all = false;
-                //    }
-                //}
-
-                //if (is_require_all) {
-                    //trường hợp không rỗng
-                    var form = $('#p-form')[0];
-                    var formData = new FormData(form);
-                    //console.log(window.location.origin + '/QLSV/Add');
-
-                    $.ajax(
-                        {
-                            type: "POST",
-                            //data: {id: $("#hosothisinh_id").html()},
-                            data: formData,
-                            //data: JSON.stringify(lst),
-                            contentType: "application/json; charset=utf-8",
-                            url: window.location.origin + '/Admin/Add',
-                            processData: false,
-                            contentType: false,
-                            cache: false,
-                            success: function (response) {
-                                alert(response);
-                            },
-                            error: function (response) {
-                                alert("Xử lý thêm mới thất bại");
-                            }
-                        }
-                    );
-                //}
-                //else {
-                //    //trường hợp mssv rỗng
-                //    alert("Vui lòng điền vào các trường dữ liệu bắt buộc");
-                //}
-            })
-        })
-    </script>
+ 
 </body>
 
 </html>
