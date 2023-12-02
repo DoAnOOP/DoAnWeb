@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewBag.Title = "addCategories";
+    ViewBag.Title = "addcategories";
     Layout = "~/Views/Shared/_Layout.cshtml";
     <script src="~/Content/assets/js/core/jquery.min.js"></script>
     <link href="~/Content/assets/css/uploader.css" rel="stylesheet" />
@@ -13,12 +13,12 @@
                 <div class="row">
                     <div class="col-sm-6 text-left">
                         <h5 class="card-category">Dashboard</h5>
-                        <h2 class="card-title">Adding Categories</h2>
+                        <h2 class="card-title">Adding categories</h2>
                     </div>
                 </div>
             </div>
             <div class="card-body">
-                <form id="Category-form" class="row">
+                <form id="category-form" class="row">
                     <div class="col-6">
                         <div id="file-upload-form" class="uploader">
                             <input id="file-upload" type="file" name="fileUpload" accept="image/*" required />
@@ -41,21 +41,16 @@
                                    name="p-image" id='p-image' required />
                         </div>
                         <div class="text-input">
-                            <label for="p-name" class="text-label">CategoryID:</label>
-                            <input type="text" class="text-field" placeholder="Denim pant..." name="p-CategoryID" id='p-CategoryID'
-                                   required />
-                        </div>
-                        <div class="text-input">
                             <label for="p-name" class="text-label">Category's name:</label>
                             <input type="text" class="text-field" placeholder="Denim pant..." name="p-name" id='p-name'
                                    required />
                         </div>
                         <div class="text-input">
                             <label for="p-desc" class="text-label">Category's description:</label>
-                            <textarea class="text-field" rows="10" placeholder="This Category will bring about....."
+                            <textarea class="text-field" rows="10" placeholder="This category will bring about....."
                                       name="p-desc" id='p-desc' required></textarea>
                         </div>
-                        <input class="submit-btn" type="submit" id="btn_them" value="Submit Category's information">
+                        <input class="submit-btn" type="submit" value="Submit category's information">
                     </div>
 
                 </form>
@@ -64,54 +59,8 @@
     </div>
 </div>
 
-<script>
-    $(document).ready(function () {
-        $("#btn_them").click(function () {
 
-            console.log("Hello")
-
-            ////kỹ thuật validate input requiment phía view
-            //var input_require = $(".require");
-            //var is_require_all = true;
-            //for (i = 0; i < input_require.length; i++) {
-            //    if (!$(input_require[i]).val()) {
-            //        is_require_all = false;
-            //    }
-            //}
-
-            //if (is_require_all) {
-            //trường hợp không rỗng
-            var form = $('#Category-form')[0];
-            var formData = new FormData(form);
-            //console.log(window.location.origin + '/QLSV/Add');
-
-            $.ajax(
-                {
-                    type: "POST",
-                    //data: {id: $("#hosothisinh_id").html()},
-                    data: formData,
-                    //data: JSON.stringify(lst),
-                    contentType: "application/json; charset=utf-8",
-                    url: window.location.origin + '/Admin/Add',
-                    processData: false,
-                    contentType: false,
-                    cache: false,
-                    success: function (response) {
-                        /*alert(response);*/
-                    },
-                    error: function (response) {
-                        /*alert("Xử lý thêm mới thất bại");*/
-                    }
-                }
-            );
-            //}
-            //else {
-            //    //trường hợp mssv rỗng
-            //    alert("Vui lòng điền vào các trường dữ liệu bắt buộc");
-            //}
-        })
-    })
-</script>
+<script src="~/Content/assets/js/uploader.js"></script>
 
 <script>
     document.getElementById("file-upload").addEventListener("change", (e) => {
@@ -121,7 +70,7 @@
 
 
     const handleSubmit = () => {
-        const form = new FormData(document.getElementById("Category-form"));
+        const form = new FormData(document.getElementById("category-form"));
         const image = form.get("fileUpload");
         console.log(image);
 
@@ -140,4 +89,32 @@
                 document.getElementById("p-image").value = res.data.url
             })
     }
+</script>
+
+<script>
+    $(document).ready(function () {
+        $(".submit-btn").click(function (e) {
+            e.preventDefault()
+            var form = $('#category-form')[0];
+            var formData = new FormData(form);
+
+            $.ajax(
+                {
+                    type: "POST",
+                    data: formData,
+                    contentType: "application/json; charset=utf-8",
+                    url: window.location.origin + '/Admin/Add',
+                    processData: false,
+                    contentType: false,
+                    cache: false,
+                    success: function (response) {
+                        alert(response);
+                    },
+                    error: function (response) {
+                        alert("Xử lý thêm mới thất bại");
+                    }
+                }
+            )
+        })
+    })
 </script>
