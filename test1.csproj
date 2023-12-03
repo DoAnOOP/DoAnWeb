@@ -121,8 +121,11 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Areas\User\Controllers\ProductController.cs" />
-    <Compile Include="Areas\User\UserAreaRegistration.cs" />
+    <Compile Include="Areas\Login\Controllers\LoginController.cs" />
+    <Compile Include="Areas\Login\LoginAreaRegistration.cs" />
+    <Compile Include="Areas\Users\Controllers\ProductController.cs" />
+    <Compile Include="Areas\Users\Controllers\UserController.cs" />
+    <Compile Include="Areas\Users\UsersAreaRegistration.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
@@ -137,6 +140,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\Login\Data\app.js" />
+    <Content Include="Areas\Login\Data\img\log.svg" />
+    <Content Include="Areas\Login\Data\img\register.svg" />
+    <Content Include="Areas\Login\Data\style.css" />
     <Content Include="Content\assets\css\black-dashboard.css" />
     <Content Include="Content\assets\css\black-dashboard.min.css" />
     <Content Include="Content\assets\css\nucleo-icons.css" />
@@ -234,6 +241,62 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="Content\css\animate.css" />
+    <Content Include="Content\css\bootstrap.min.css" />
+    <Content Include="Content\css\font-awesome.min.css" />
+    <Content Include="Content\css\owl.carousel.css" />
+    <Content Include="Content\css\style.css" />
+    <Content Include="Content\icon-fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\img\bg.jpg" />
+    <Content Include="Content\img\blog-thumb\1.jpg" />
+    <Content Include="Content\img\blog-thumb\2.jpg" />
+    <Content Include="Content\img\blog-thumb\3.jpg" />
+    <Content Include="Content\img\cards\1.png" />
+    <Content Include="Content\img\cards\2.png" />
+    <Content Include="Content\img\cards\3.png" />
+    <Content Include="Content\img\cards\4.png" />
+    <Content Include="Content\img\cards\5.png" />
+    <Content Include="Content\img\categorie-page-top.png" />
+    <Content Include="Content\img\favicon.ico" />
+    <Content Include="Content\img\featured\featured-1.jpg" />
+    <Content Include="Content\img\featured\featured-2.jpg" />
+    <Content Include="Content\img\featured\featured-3.jpg" />
+    <Content Include="Content\img\icons\bag.png" />
+    <Content Include="Content\img\icons\check.png" />
+    <Content Include="Content\img\icons\eye.png" />
+    <Content Include="Content\img\icons\heart.png" />
+    <Content Include="Content\img\icons\layout-1.png" />
+    <Content Include="Content\img\icons\layout-2.png" />
+    <Content Include="Content\img\icons\search.png" />
+    <Content Include="Content\img\intro\1.jpg" />
+    <Content Include="Content\img\intro\2.jpg" />
+    <Content Include="Content\img\intro\3.jpg" />
+    <Content Include="Content\img\intro\4.jpg" />
+    <Content Include="Content\img\intro\5.jpg" />
+    <Content Include="Content\img\logo.png" />
+    <Content Include="Content\img\page-info-art.png" />
+    <Content Include="Content\img\products\1.jpg" />
+    <Content Include="Content\img\products\10.jpg" />
+    <Content Include="Content\img\products\11.jpg" />
+    <Content Include="Content\img\products\12.jpg" />
+    <Content Include="Content\img\products\2.jpg" />
+    <Content Include="Content\img\products\3.jpg" />
+    <Content Include="Content\img\products\4.jpg" />
+    <Content Include="Content\img\products\5.jpg" />
+    <Content Include="Content\img\products\6.jpg" />
+    <Content Include="Content\img\products\7.jpg" />
+    <Content Include="Content\img\products\8.jpg" />
+    <Content Include="Content\img\products\9.jpg" />
+    <Content Include="Content\img\product\1.jpg" />
+    <Content Include="Content\img\product\2.jpg" />
+    <Content Include="Content\img\product\3.jpg" />
+    <Content Include="Content\img\product\4.jpg" />
+    <Content Include="Content\img\product\cart.jpg" />
+    <Content Include="Content\img\product\thumb-1.jpg" />
+    <Content Include="Content\img\product\thumb-2.jpg" />
+    <Content Include="Content\img\product\thumb-3.jpg" />
+    <Content Include="Content\img\product\thumb-4.jpg" />
+    <Content Include="Content\img\slider-img.png" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -406,9 +469,23 @@
       <LastGenOutput>Database.designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Areas\User\Views\web.config" />
-    <Content Include="Areas\User\Views\Product\Product2.cshtml" />
-    <Content Include="Areas\User\Views\Product\categorie.cshtml" />
+    <Content Include="Areas\Users\Views\web.config" />
+    <Content Include="Areas\Users\Views\Shared\Layout.cshtml" />
+    <Content Include="Areas\Users\Views\Shared\Error2.cshtml" />
+    <Content Include="Areas\Users\Views\Product\Product2.cshtml" />
+    <Content Include="Areas\Users\Views\Product\categorie.cshtml" />
+    <Content Include="Areas\Users\Views\Product\cart.cshtml" />
+    <Content Include="Areas\Users\Views\Product\checkout.cshtml" />
+    <Content Include="Content\fonts\Futura.woff" />
+    <Content Include="Content\fonts\Futura1.woff" />
+    <Content Include="Content\fonts\WEB BASED RESULT PUBLICATION SYSTEM FOR EDUCATION BOARDS.pdf" />
+    <Content Include="Content\icon-fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\icon-fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\icon-fonts\fontawesome-webfont.woff2" />
+    <Content Include="Areas\Users\Views\User\Index.cshtml" />
+    <Content Include="Areas\Users\Views\User\Contact.cshtml" />
+    <Content Include="Areas\Login\Views\web.config" />
+    <Content Include="Areas\Login\Views\Login\Login.cshtml" />
     <None Include="Models\Database.dbml.layout">
       <DependentUpon>Database.dbml</DependentUpon>
     </None>
@@ -422,6 +499,14 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\js\bootstrap.min.js" />
+    <Content Include="Scripts\js\jquery-3.2.1.min.js" />
+    <Content Include="Scripts\js\jquery.nicescroll.min.js" />
+    <Content Include="Scripts\js\main.js" />
+    <Content Include="Scripts\js\map.js" />
+    <Content Include="Scripts\js\mixitup.min.js" />
+    <Content Include="Scripts\js\owl.carousel.min.js" />
+    <Content Include="Scripts\js\sly.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -445,9 +530,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\User\Data\" />
-    <Folder Include="Areas\User\Views\Shared\" />
-    <Folder Include="Area\" />
+    <Folder Include="Areas\Login\Views\Shared\" />
+    <Folder Include="Areas\Users\Data\" />
+    <Folder Include="Views\Login\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />

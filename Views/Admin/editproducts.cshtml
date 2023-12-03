@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "editproducts";
     Layout = "~/Views/Shared/_Layout.cshtml";
     <script src="~/Content/assets/js/core/jquery.min.js"></script>
@@ -13,7 +12,7 @@
                 <div class="row">
                     <div class="col-sm-6 text-left">
                         <h5 class="card-category">Dashboard</h5>
-                        <h2 class="card-title">Edit Products</h2>
+                        <h2 class="card-title">Editing Product</h2>
                     </div>
                 </div>
             </div>
@@ -38,12 +37,7 @@
                         <div class="text-input">
                             <label for="p-image" class="text-label">Image's URL:</label>
                             <input type="text" class="text-field" placeholder="https://photos.google.com/photo/...."
-                                   name="p-image" id='p-image' required />
-                        </div>
-                        <div class="text-input">
-                            <label for="p-name" class="text-label">CategoryID:</label>
-                            <input type="text" class="text-field" placeholder="Denim pant..." name="p-CategoryID" id='p-CategoryID'
-                                   required />
+                                   name="p-image" id='p-image' required readonly />
                         </div>
                         <div class="text-input">
                             <label for="p-name" class="text-label">Product's name:</label>
@@ -59,7 +53,7 @@
                             <textarea class="text-field" rows="10" placeholder="This product will bring about....."
                                       name="p-desc" id='p-desc' required></textarea>
                         </div>
-                        <input class="submit-btn" type="submit" id="btn_them" value="Submit change product's information">
+                        <input class="submit-btn" type="submit" value="Edit product's information">
                     </div>
 
                 </form>
@@ -68,186 +62,20 @@
     </div>
 </div>
 
-@*<script>$(document).ready(function () {
-            $("#btn_them").click(function () {
 
-                console.log("Hello")
-
-                ////kỹ thuật validate input requiment phía view
-                //var input_require = $(".require");
-                //var is_require_all = true;
-                //for (i = 0; i < input_require.length; i++) {
-                //    if (!$(input_require[i]).val()) {
-                //        is_require_all = false;
-                //    }
-                //}
-
-                //if (is_require_all) {
-                //trường hợp không rỗng
-                var form = $('#product-form')[0];
-                var formData = new FormData(form);
-                //console.log(window.location.origin + '/QLSV/Add');
-
-                $.ajax(
-                    {
-                        type: "POST",
-                        //data: {id: $("#hosothisinh_id").html()},
-                        data: formData,
-                        //data: JSON.stringify(lst),
-                        contentType: "application/json; charset=utf-8",
-                        url: window.location.origin + '/Admin/Add',
-                        processData: false,
-                        contentType: false,
-                        cache: false,
-                        success: function (response) {
-                            alert(response);
-                        },
-                        error: function (response) {
-                            alert("Xử lý thêm mới thất bại");
-                        }
-                    }
-                );
-                //}
-                //else {
-                //    //trường hợp mssv rỗng
-                //    alert("Vui lòng điền vào các trường dữ liệu bắt buộc");
-                //}
-            })
-        })</script>
-    <script>
-        $(document).ready(function () {
-            var url = new URL(window.location.href);
-            var id = url.searchParams.get("mssv");
-
-            //trường hợp không rỗng
-            var formData = new FormData();
-            formData.append("mssv", id);
-
-            $.ajax(
-                {
-                    type: "POST",
-                    data: formData,
-                    contentType: "application/json; charset=utf-8",
-                    url: window.location.origin + '/QLSV/get_SV_Info',
-                    processData: false,
-                    contentType: false,
-                    cache: false,
-                    success: function (response) {
-                        //alert(response);
-                        if (response.indexOf("Không tìm thấy") >= 0 || response.indexOf("thất bại") >= 0) {
-                            //trường hợp lỗi
-                            $("#div_noft").html(response);
-                        }
-                        else {
-                            //trường hợp tìm thấy sinh viên cần sửa
-                            /*console.log(response);*/
-                            var sv_obj = JSON.parse(response);
-                            $("#txt_id").val(sv_obj.MSSV);
-                            $("#txt_mssv").val(sv_obj.MSSV);
-                            $("#txt_hoten").val(sv_obj.HoTen);
-                            $("#txt_matkhau").val(sv_obj.MatKhau);
-                            //$("#txt_nhaclai_matkhau").val(sv_obj.MatKhau);
-                            //console.log(sv_obj.MSSV);
-                        }
-                    },
-                    error: function (response) {
-                        alert("Xử lý lấy thông tin sinh viên cần sửa thất bại");
-                    }
-                }
-            );
-        })
-
-        $("#btn_sua").click(function () {
-
-            //kỹ thuật validate input requiment phía view
-            var input_require = $(".require");
-            var is_require_all = true;
-            for (i = 0; i < input_require.length; i++) {
-                if (!$(input_require[i]).val()) {
-                    is_require_all = false;
-                }
-            }
-
-            if (is_require_all) {
-                //trường hợp không rỗng
-                var form = $('#frm_data')[0];
-                var formData = new FormData(form);
-                //console.log(window.location.origin + '/QLSV/Add');
-
-                $.ajax(
-                    {
-                        type: "POST",
-                        //data: {id: $("#hosothisinh_id").html()},
-                        data: formData,
-                        //data: JSON.stringify(lst),
-                        contentType: "application/json; charset=utf-8",
-                        url: window.location.origin + '/QLSV/Edit',
-                        processData: false,
-                        contentType: false,
-                        cache: false,
-                        success: function (response) {
-                            //alert(response);
-                            $("#div_noft").html(response);
-                        },
-                        error: function (response) {
-                            alert("Xử lý cập nhật thông tin sv thất bại");
-                        }
-                    }
-                );
-            }
-            else {
-                //trường hợp mssv rỗng
-                alert("Vui lòng điền vào các trường dữ liệu bắt buộc");
-            }
-        })
-
-        //$(document).ready(function () {
-        //    var url = new URL(window.location.href);
-        //    var id = url.searchParams.get("id");
-
-        //    var formData = new FormData();
-        //    formData.append("id", id);
-
-        //    console.log(id);
-
-        //    $.ajax(
-        //        {
-        //            type: "POST",
-        //            //data: {id: id},
-        //            data: formData,
-        //            //data: JSON.stringify(lst),
-        //            contentType: "application/json; charset=utf-8",
-        //            url: window.location.origin + '/QLSV/get_SV_Edit',
-        //            processData: false,
-        //            contentType: false,
-        //            cache: false,
-        //            success: function (response) {
-        //                //alert(response);
-        //                $("#div_noft").html(response);
-        //            },
-        //            error: function (response) {
-        //                alert("Xử lý thêm mới thất bại");
-        //            }
-        //        }
-        //    );
-        //})
-    </script>*@
+<script src="~/Content/assets/js/uploader.js"></script>
 
 <script>
     document.getElementById("file-upload").addEventListener("change", (e) => {
         e.preventDefault();
         handleSubmit();
     })
-
-
     const handleSubmit = () => {
         const form = new FormData(document.getElementById("product-form"));
         const image = form.get("fileUpload");
         console.log(image);
-
         const data = new FormData()
         data.append("image", image)
-
         fetch(
             "https://api.imgbb.com/1/upload?key=c3a40ca387e441f23f30af59940c7ef2",
             {
@@ -263,66 +91,66 @@
 </script>
 
 <script>
-    //function Delete_obj(id) {
-    //    if (confirm("Bạn có thực sự muốn xóa bản ghi có id=" + id + " này không?")) {
-    //        //xử lý xóa
-    //        /*alert("Đồng ý xóa");*/
-
-    //        //trường hợp không rỗng
-    //        var formData = new FormData();
-    //        formData.append("mssv", id);
-
-    //        $.ajax(
-    //            {
-    //                type: "POST",
-    //                data: formData,
-    //                contentType: "application/json; charset=utf-8",
-    //                url: window.location.origin + '/QLSV/Del_SV',
-    //                processData: false,
-    //                contentType: false,
-    //                cache: false,
-    //                success: function (response) {
-    //                    var rs = JSON.parse(response);
-    //                    alert(rs.ErrDesc);
-    //                    //refresh lại trang web để thấy thay đổi;
-    //                    window.location.href = "/QLSV/DSSV";
-    //                },
-    //                error: function (response) {
-    //                    alert("Xóa sinh viên thất bại");
-    //                }
-    //            }
-    //        );
-    //    }
-    //};
-
     $(document).ready(function () {
+        var url = new URL(window.location.href);
+        var productID = url.searchParams.get("p-id");
+        //trường hợp không rỗng
+        var formData = new FormData();
+        formData.append("productID", productID);
         $.ajax(
             {
                 type: "POST",
+                data: formData,
                 contentType: "application/json; charset=utf-8",
-                url: window.location.origin + '/Admin/get_All',
+                url: window.location.origin + '/Admin/get_SP_Info',
                 processData: false,
                 contentType: false,
                 cache: false,
                 success: function (response) {
-                    var rs = JSON.parse(response);
+                    var data = JSON.parse(response);
+                    $("#p-image").val(data.URL);
+                    $("#p-name").val(data.NameProduct);
+                    $("#p-price").val(data.Price);
+                    $("#p-desc").val(data.Description);
+                    document.getElementById('start').classList.add("hidden");
+                    document.getElementById('notimage').classList.add("hidden");
+                    document.getElementById('file-image').classList.remove("hidden");
+                    document.getElementById("file-image").src = data.URL;
 
-                    if (rs.ErrCode == 1) {
-                        //trường hợp lấy dssv thành công
-                        //console.log(rs.Data);
-                        console.log(rs.Data);
-
-                        // $("#list_category").html(str);
-                    }
-                    else {
-                        alert("loi");
-                    }
                 },
                 error: function (response) {
-                    alert("Lấy DSSP thất bại");
+                    alert("Xử lý lấy thông tin sinh viên cần sửa thất bại");
                 }
             }
         );
     })
+</script>
 
+<script>
+    $(".submit-btn").click(function (e) {
+        e.preventDefault();
+        var url = new URL(window.location.href);
+        var productID = url.searchParams.get("p-id");
+        var form = $('#product-form')[0];
+        var formData = new FormData(form);
+        formData.append("p-id", productID);
+        $.ajax(
+            {
+                type: "POST",
+                data: formData,
+                contentType: "application/json; charset=utf-8",
+                url: window.location.origin + '/Admin/Edit',
+                processData: false,
+                contentType: false,
+                cache: false,
+                success: function (response) {
+                    alert(response);
+                    window.location = "productviews";
+                },
+                error: function (response) {
+                    alert("Xử lý cập nhật thông tin sv thất bại");
+                }
+            }
+        );
+    })
 </script>
