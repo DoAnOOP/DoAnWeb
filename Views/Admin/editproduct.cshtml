@@ -1,0 +1,333 @@
+<<<<<<< HEAD
+﻿
+@{
+    ViewBag.Title = "addproducts";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    <script src="~/Content/assets/js/core/jquery.min.js"></script>
+    <link href="~/Content/assets/css/uploader.css" rel="stylesheet" />
+}
+
+<div class="row">
+    <div class="col-12">
+        <div class="card card-chart">
+            <div class="card-header ">
+                <div class="row">
+                    <div class="col-sm-6 text-left">
+                        <h5 class="card-category">Dashboard</h5>
+                        <h2 class="card-title">Editing Product</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <form id="product-form" class="row">
+                    <div class="col-6">
+                        <div id="file-upload-form" class="uploader">
+                            <input id="file-upload" type="file" name="fileUpload" accept="image/*" required />
+
+                            <label for="file-upload" id="file-drag">
+                                <img id="file-image" src="#" alt="Preview" class="hidden">
+                                <div id="start">
+                                    <i class="fa fa-download" aria-hidden="true"></i>
+                                    <div>Select a file or drag here</div>
+                                    <div id="notimage" class="hidden">Please select an image</div>
+                                    <span id="file-upload-btn" class="btn btn-primary">Select a file</span>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="text-input">
+                            <label for="p-image" class="text-label">Image's URL:</label>
+                            <input type="text" class="text-field" placeholder="https://photos.google.com/photo/...."
+                                   name="p-image" id='p-image' required readonly/>
+                        </div>
+                        <div class="text-input">
+                            <label for="p-name" class="text-label">Product's name:</label>
+                            <input type="text" class="text-field" placeholder="Denim pant..." name="p-name" id='p-name'
+                                   required />
+                        </div>
+                        <div class="text-input">
+                            <label for="p-price" class="text-label">Product's price:</label>
+                            <input type="text" class="text-field" placeholder="$69" name="p-price" id='p-price' required />
+                        </div>
+                        <div class="text-input">
+                            <label for="p-desc" class="text-label">Product's description:</label>
+                            <textarea class="text-field" rows="10" placeholder="This product will bring about....."
+                                      name="p-desc" id='p-desc' required></textarea>
+                        </div>
+                        <input class="submit-btn" type="submit" value="Edit product's information">
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="~/Content/assets/js/uploader.js"></script>
+
+<script>
+    document.getElementById("file-upload").addEventListener("change", (e) => {
+        e.preventDefault();
+        handleSubmit();
+    })
+
+
+    const handleSubmit = () => {
+        const form = new FormData(document.getElementById("product-form"));
+        const image = form.get("fileUpload");
+        console.log(image);
+
+        const data = new FormData()
+        data.append("image", image)
+
+        fetch(
+            "https://api.imgbb.com/1/upload?key=c3a40ca387e441f23f30af59940c7ef2",
+            {
+                method: "POST",
+                body: data
+            }
+        ).then((res) => res.json())
+            .then((res) => {
+                console.log(res.data.url);
+                document.getElementById("p-image").value = res.data.url
+            })
+    }
+</script>
+
+<script>
+
+    $(document).ready(function () {
+        var url = new URL(window.location.href);
+        var productID = url.searchParams.get("p-id");
+
+        //trường hợp không rỗng
+        var formData = new FormData();
+        formData.append("productID", productID);
+
+        $.ajax(
+            {
+                type: "POST",
+                data: formData,
+                contentType: "application/json; charset=utf-8",
+                url: window.location.origin + '/Admin/get_SP_Info',
+                processData: false,
+                contentType: false,
+                cache: false,
+                success: function (response) {
+                    var data = JSON.parse(response);
+                    $("#p-image").val(data.URL);
+                    $("#p-name").val(data.NameProduct);
+                    $("#p-price").val(data.Price);
+                    $("#p-desc").val(data.Description);
+                    document.getElementById('start').classList.add("hidden");
+                    document.getElementById('notimage').classList.add("hidden");
+                    document.getElementById('file-image').classList.remove("hidden");
+                    document.getElementById("file-image").src = data.URL;
+                    
+                },
+                error: function (response) {
+                    alert("Xử lý lấy thông tin sinh viên cần sửa thất bại");
+                }
+            }
+        );
+    })
+</script>
+
+<script>
+    $(".submit-btn").click(function (e) {
+        e.preventDefault();
+        var url = new URL(window.location.href);
+        var productID = url.searchParams.get("p-id");
+
+        var form = $('#product-form')[0];
+        var formData = new FormData(form);
+        formData.append("p-id", productID);
+            $.ajax(
+                {
+                    type: "POST",
+                    data: formData,
+                    contentType: "application/json; charset=utf-8",
+                    url: window.location.origin + '/Admin/Edit',
+                    processData: false,
+                    contentType: false,
+                    cache: false,
+                    success: function (response) {
+                        alert(response);
+                        window.location = "productviews";
+                    },
+                    error: function (response) {
+                        alert("Xử lý cập nhật thông tin sv thất bại");
+                    }
+                }
+            );
+    })
+</script>
+=======
+﻿
+@{
+    ViewBag.Title = "addproducts";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    <script src="~/Content/assets/js/core/jquery.min.js"></script>
+    <link href="~/Content/assets/css/uploader.css" rel="stylesheet" />
+}
+
+<div class="row">
+    <div class="col-12">
+        <div class="card card-chart">
+            <div class="card-header ">
+                <div class="row">
+                    <div class="col-sm-6 text-left">
+                        <h5 class="card-category">Dashboard</h5>
+                        <h2 class="card-title">Editing Product</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <form id="product-form" class="row">
+                    <div class="col-6">
+                        <div id="file-upload-form" class="uploader">
+                            <input id="file-upload" type="file" name="fileUpload" accept="image/*" required />
+
+                            <label for="file-upload" id="file-drag">
+                                <img id="file-image" src="#" alt="Preview" class="hidden">
+                                <div id="start">
+                                    <i class="fa fa-download" aria-hidden="true"></i>
+                                    <div>Select a file or drag here</div>
+                                    <div id="notimage" class="hidden">Please select an image</div>
+                                    <span id="file-upload-btn" class="btn btn-primary">Select a file</span>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="text-input">
+                            <label for="p-image" class="text-label">Image's URL:</label>
+                            <input type="text" class="text-field" placeholder="https://photos.google.com/photo/...."
+                                   name="p-image" id='p-image' required readonly/>
+                        </div>
+                        <div class="text-input">
+                            <label for="p-name" class="text-label">Product's name:</label>
+                            <input type="text" class="text-field" placeholder="Denim pant..." name="p-name" id='p-name'
+                                   required />
+                        </div>
+                        <div class="text-input">
+                            <label for="p-price" class="text-label">Product's price:</label>
+                            <input type="text" class="text-field" placeholder="$69" name="p-price" id='p-price' required />
+                        </div>
+                        <div class="text-input">
+                            <label for="p-desc" class="text-label">Product's description:</label>
+                            <textarea class="text-field" rows="10" placeholder="This product will bring about....."
+                                      name="p-desc" id='p-desc' required></textarea>
+                        </div>
+                        <input class="submit-btn" type="submit" value="Edit product's information">
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="~/Content/assets/js/uploader.js"></script>
+
+<script>
+    document.getElementById("file-upload").addEventListener("change", (e) => {
+        e.preventDefault();
+        handleSubmit();
+    })
+
+
+    const handleSubmit = () => {
+        const form = new FormData(document.getElementById("product-form"));
+        const image = form.get("fileUpload");
+        console.log(image);
+
+        const data = new FormData()
+        data.append("image", image)
+
+        fetch(
+            "https://api.imgbb.com/1/upload?key=c3a40ca387e441f23f30af59940c7ef2",
+            {
+                method: "POST",
+                body: data
+            }
+        ).then((res) => res.json())
+            .then((res) => {
+                console.log(res.data.url);
+                document.getElementById("p-image").value = res.data.url
+            })
+    }
+</script>
+
+<script>
+
+    $(document).ready(function () {
+        var url = new URL(window.location.href);
+        var productID = url.searchParams.get("p-id");
+
+        //trường hợp không rỗng
+        var formData = new FormData();
+        formData.append("productID", productID);
+
+        $.ajax(
+            {
+                type: "POST",
+                data: formData,
+                contentType: "application/json; charset=utf-8",
+                url: window.location.origin + '/Admin/get_SP_Info',
+                processData: false,
+                contentType: false,
+                cache: false,
+                success: function (response) {
+                    var data = JSON.parse(response);
+                    $("#p-image").val(data.URL);
+                    $("#p-name").val(data.NameProduct);
+                    $("#p-price").val(data.Price);
+                    $("#p-desc").val(data.Description);
+                    document.getElementById('start').classList.add("hidden");
+                    document.getElementById('notimage').classList.add("hidden");
+                    document.getElementById('file-image').classList.remove("hidden");
+                    document.getElementById("file-image").src = data.URL;
+                    
+                },
+                error: function (response) {
+                    alert("Xử lý lấy thông tin sinh viên cần sửa thất bại");
+                }
+            }
+        );
+    })
+</script>
+
+<script>
+    $(".submit-btn").click(function (e) {
+        e.preventDefault();
+        var url = new URL(window.location.href);
+        var productID = url.searchParams.get("p-id");
+
+        var form = $('#product-form')[0];
+        var formData = new FormData(form);
+        formData.append("p-id", productID);
+            $.ajax(
+                {
+                    type: "POST",
+                    data: formData,
+                    contentType: "application/json; charset=utf-8",
+                    url: window.location.origin + '/Admin/Edit',
+                    processData: false,
+                    contentType: false,
+                    cache: false,
+                    success: function (response) {
+                        alert(response);
+                        window.location = "productviews";
+                    },
+                    error: function (response) {
+                        alert("Xử lý cập nhật thông tin sv thất bại");
+                    }
+                }
+            );
+    })
+</script>
+>>>>>>> 1dacdc28b099f23dd043881291f1e7f428c1a7ce

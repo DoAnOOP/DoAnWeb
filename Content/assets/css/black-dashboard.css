@@ -20483,6 +20483,7 @@ Copyright (c) 2015 Daniel Eden
 }
 
 .product-item figure {
+  height: 40vh;
   margin-bottom: 2em;
   position: relative;
   overflow: hidden;
