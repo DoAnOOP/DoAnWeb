@@ -1,6 +1,4 @@
-<<<<<<< HEAD
-﻿
-@{
+﻿@{
     ViewBag.Title = "productviews";
     Layout = "~/Views/Shared/_Layout.cshtml";
     <script src="~/Content/assets/js/core/jquery.min.js"></script>
@@ -38,10 +36,6 @@
                 cache: false,
                 success: function (response) {
                     var rs = JSON.parse(response);
-<<<<<<< HEAD
-=======
-
->>>>>>> 21f93c46b1c92c480f7d1aed59c3d7a6c67b8390
                     if (rs.ErrCode == 1) {
                         console.log(rs.Data)
                         const products = rs.Data
@@ -66,11 +60,7 @@
                          <p>${"$" + item.Price}</p>
                          <div>
                              <a href="#" class="site-btn btn-line">REMOVE</a>
-<<<<<<< HEAD
                              <a href="./editproducts?p-id=${item.ID}" class="site-btn btn-line">EDIT</a>
-=======
-                             <a href="./editproduct?p-id=${item.ID}" class="site-btn btn-line">EDIT</a>
->>>>>>> 21f93c46b1c92c480f7d1aed59c3d7a6c67b8390
                          </div>
                      </div>
                  </div>
@@ -85,10 +75,6 @@
                         </div>
                     </div>`
                         console.log(displayProducts);
-<<<<<<< HEAD
-=======
-
->>>>>>> 21f93c46b1c92c480f7d1aed59c3d7a6c67b8390
                         document.getElementById("product-filter").innerHTML = displayProducts;
                     }
                     else {
@@ -102,103 +88,3 @@
         );
     })
 </script>
-<<<<<<< HEAD
-=======
-
-=======
-﻿
-@{
-    ViewBag.Title = "productviews";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-    <script src="~/Content/assets/js/core/jquery.min.js"></script>
-}
-
-<div class="row">
-    <div class="col-12">
-        <div class="card card-chart">
-            <div class="card-header ">
-                <div class="row">
-                    <div class="col-sm-6 text-left">
-                        <h5 class="card-category">Dashboard</h5>
-                        <h2 class="card-title">Products</h2>
-                    </div>
-                </div>
-            </div>
-            <div class="card-body">
-
-                <div class="row" id="product-filter">
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<script>
-    $(document).ready(function () {
-        $.ajax(
-            {
-                type: "POST",
-                contentType: "application/json; charset=utf-8",
-                url: window.location.origin + '/Admin/get_All',
-                processData: false,
-                contentType: false,
-                cache: false,
-                success: function (response) {
-                    var rs = JSON.parse(response);
-
-                    if (rs.ErrCode == 1) {
-                        console.log(rs.Data)
-                        const products = rs.Data
-                        let displayProducts = products.map(function (item) {
-                            return `<div class="mix col-lg-3 col-md-6 best">
-                 <div class="product-item">
-                     <figure>
-                         <img src="${item.URL}" alt="">
-                         <div class="pi-meta">
-                             <div class="pi-m-left">
-                                 <img src="/Content/assets/img/icons/eye.png" alt="">
-                                 <p>quick view</p>
-                             </div>
-                             <div class="pi-m-right">
-                                 <img src="/Content/assets/img/icons/heart.png" alt="">
-                                 <p>save</p>
-                             </div>
-                         </div>
-                     </figure>
-                     <div class="product-info">
-                         <h6>${item.NameProduct}</h6>
-                         <p>${"$" + item.Price}</p>
-                         <div>
-                             <a href="#" class="site-btn btn-line">REMOVE</a>
-                             <a href="./editproduct?p-id=${item.ID}" class="site-btn btn-line">EDIT</a>
-                         </div>
-                     </div>
-                 </div>
-             </div>`;
-                        });
-                        displayProducts = displayProducts.join("");
-                        displayProducts += `<div class="mix col-lg-3 col-md-6 best">
-                        <div>
-                            <a class="add-product-btn" href="addproducts">
-                                <i class="tim-icons icon-simple-add"></i>
-                            </a>
-                        </div>
-                    </div>`
-                        console.log(displayProducts);
-
-                        document.getElementById("product-filter").innerHTML = displayProducts;
-                    }
-                    else {
-                        alert(rs.ErrDesc);
-                    }
-                },
-                error: function (response) {
-                    alert("Lấy DSSP thất bại");
-                }
-            }
-        );
-    })
-</script>
-
->>>>>>> 1dacdc28b099f23dd043881291f1e7f428c1a7ce
->>>>>>> 21f93c46b1c92c480f7d1aed59c3d7a6c67b8390

@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "addproducts";
     Layout = "~/Views/Shared/_Layout.cshtml";
     <script src="~/Content/assets/js/core/jquery.min.js"></script>
@@ -36,11 +35,7 @@
                         <div class="text-input">
                             <label for="p-image" class="text-label">Image's URL:</label>
                             <input type="text" class="text-field" placeholder="https://photos.google.com/photo/...."
-<<<<<<< HEAD
-                                   name="p-image" id='p-image' required readonly />
-=======
                                    name="p-image" id='p-image' required />
->>>>>>> 21f93c46b1c92c480f7d1aed59c3d7a6c67b8390
                         </div>
                         <div class="text-input">
                             <label for="p-name" class="text-label">Product's name:</label>
@@ -64,11 +59,6 @@
         </div>
     </div>
 </div>
-
-<<<<<<< HEAD
-=======
-
->>>>>>> 21f93c46b1c92c480f7d1aed59c3d7a6c67b8390
 <script src="~/Content/assets/js/uploader.js"></script>
 
 <script>
@@ -93,8 +83,7 @@
                 console.log(res.data.url);
                 document.getElementById("p-image").value = res.data.url
             })
-    }
-</script>
+    }</script>
 
 <script>
     $(document).ready(function () {
@@ -102,10 +91,6 @@
             e.preventDefault()
             var form = $('#product-form')[0];
             var formData = new FormData(form);
-<<<<<<< HEAD
-=======
-
->>>>>>> 21f93c46b1c92c480f7d1aed59c3d7a6c67b8390
             $.ajax(
                 {
                     type: "POST",

@@ -541,7 +541,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Login\Views\Shared\" />
     <Folder Include="Areas\Users\Data\" />
-    <Folder Include="Views\Login\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />
