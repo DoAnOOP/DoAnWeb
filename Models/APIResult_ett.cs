@@ -11,7 +11,8 @@ namespace test1.Models
         Fail = 0,
         Success = 1,
         Empty = 2,
-        NotExistent = 3
+        NotExistent = 3,
+        InputEmpty = 4
     }
 
     public class APIResult_ett<T>

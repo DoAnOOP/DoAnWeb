@@ -16,27 +16,60 @@ namespace test1.Controllers
         // GET: Admin
         public ActionResult Index()
         {
-            return View();
+            if (System.Web.HttpContext.Current.Session["is_login"] != null)
+            {
+                if ((bool)Session["is_login"])
+                {
+                    //trường hợp đã login rồi
+                    return View();
+                }
+            }
+            return RedirectToAction("DangNhap", "TaiKhoan");
         }
         public ActionResult tables()
         {
-            return View();
+            //Kiểm tra đăng nhập trước khi cho phép truy cập vào trang 
+            if (Shareds.Utils.check_login(Session))
+            {
+                return View();
+            }
+            return RedirectToAction("DangNhap", "TaiKhoan");
         }
         public ActionResult productviews()
         {
-            return View();
+            //Kiểm tra đăng nhập trước khi cho phép truy cập vào trang 
+            if (Shareds.Utils.check_login(Session))
+            {
+                return View();
+            }
+            return RedirectToAction("DangNhap", "TaiKhoan");
         }
         public ActionResult dashboard()
         {
-            return View();
+            //Kiểm tra đăng nhập trước khi cho phép truy cập vào trang 
+            if (Shareds.Utils.check_login(Session))
+            {
+                return View();
+            }
+            return RedirectToAction("DangNhap", "TaiKhoan");
         }
         public ActionResult addproducts()
         {
-            return View();
+            //Kiểm tra đăng nhập trước khi cho phép truy cập vào trang 
+            if (Shareds.Utils.check_login(Session))
+            {
+                return View();
+            }
+            return RedirectToAction("DangNhap", "TaiKhoan");
         }
         public ActionResult editproducts()
         {
-            return View();
+            //Kiểm tra đăng nhập trước khi cho phép truy cập vào trang 
+            if (Shareds.Utils.check_login(Session))
+            {
+                return View();
+            }
+            return RedirectToAction("DangNhap", "TaiKhoan");
         }
 
         public string Add()

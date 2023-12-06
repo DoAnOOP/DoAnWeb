@@ -121,13 +121,12 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Areas\Login\Controllers\LoginController.cs" />
-    <Compile Include="Areas\Login\LoginAreaRegistration.cs" />
     <Compile Include="Areas\Users\Controllers\ProductController.cs" />
     <Compile Include="Areas\Users\Controllers\UserController.cs" />
     <Compile Include="Areas\Users\UsersAreaRegistration.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\TaiKhoanController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -138,6 +137,7 @@
       <DependentUpon>Database.dbml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Shareds\Untils.cs" />
     <Compile Include="TextTemplate1.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -145,13 +145,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\Login\Data\app.js" />
-    <Content Include="Areas\Login\Data\img\log.svg" />
-    <Content Include="Areas\Login\Data\img\register.svg" />
-    <Content Include="Areas\Login\Data\style.css" />
     <Content Include="Content\assets\css\black-dashboard.css" />
     <Content Include="Content\assets\css\black-dashboard.min.css" />
     <Content Include="Content\assets\css\nucleo-icons.css" />
+    <Content Include="Content\assets\css\style.css" />
     <Content Include="Content\assets\css\uploader.css" />
     <Content Include="Content\assets\demo\demo.css" />
     <Content Include="Content\assets\demo\demo.js" />
@@ -278,6 +275,7 @@
     <Content Include="Content\img\intro\3.jpg" />
     <Content Include="Content\img\intro\4.jpg" />
     <Content Include="Content\img\intro\5.jpg" />
+    <Content Include="Content\img\log.svg" />
     <Content Include="Content\img\logo.png" />
     <Content Include="Content\img\page-info-art.png" />
     <Content Include="Content\img\products\1.jpg" />
@@ -301,6 +299,7 @@
     <Content Include="Content\img\product\thumb-2.jpg" />
     <Content Include="Content\img\product\thumb-3.jpg" />
     <Content Include="Content\img\product\thumb-4.jpg" />
+    <Content Include="Content\img\register.svg" />
     <Content Include="Content\img\slider-img.png" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
@@ -489,8 +488,6 @@
     <Content Include="Content\icon-fonts\fontawesome-webfont.woff2" />
     <Content Include="Areas\Users\Views\User\Index.cshtml" />
     <Content Include="Areas\Users\Views\User\Contact.cshtml" />
-    <Content Include="Areas\Login\Views\web.config" />
-    <Content Include="Areas\Login\Views\Login\Login.cshtml" />
     <None Include="Models\Database.dbml.layout">
       <DependentUpon>Database.dbml</DependentUpon>
     </None>
@@ -504,6 +501,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\js\app.js" />
     <Content Include="Scripts\js\bootstrap.min.js" />
     <Content Include="Scripts\js\jquery-3.2.1.min.js" />
     <Content Include="Scripts\js\jquery.nicescroll.min.js" />
@@ -536,10 +534,10 @@
     <Content Include="Views\Admin\dashboard.cshtml" />
     <Content Include="Views\Admin\addproducts.cshtml" />
     <Content Include="Views\Admin\editproducts.cshtml" />
+    <Content Include="Views\TaiKhoan\DangNhap.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Login\Views\Shared\" />
     <Folder Include="Areas\Users\Data\" />
   </ItemGroup>
   <ItemGroup>
