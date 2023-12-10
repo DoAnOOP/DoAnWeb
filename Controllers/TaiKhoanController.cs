@@ -19,7 +19,7 @@ namespace test1.Controllers
         }
         public string DangNhap_action()
         {
-            APIResult_ett<string> rs = new APIResult_ett<string>();
+            APIResult_ett<List<Account>> rs = new APIResult_ett<List<Account>>();
 
             try
             {
@@ -41,7 +41,7 @@ namespace test1.Controllers
                             //trường hợp có dữ liệu                        
                             rs.ErrCode = EnumErrCode.Success;
                             rs.ErrDesc = "Đăng nhập hệ thống admin thành công";
-                            rs.Data = "";
+                            rs.Data = db.Accounts.Where(o => o.UserName == tk && o.Password == mk).ToList();
                             // Chuyển hướng đến trang admin
                             Redirect("~/Admin/addproducts");
                         }
@@ -51,7 +51,7 @@ namespace test1.Controllers
                             //trường hợp có dữ liệu                        
                             rs.ErrCode = EnumErrCode.Success;
                             rs.ErrDesc = "Đăng nhập hệ thống user thành công";
-                            rs.Data = "";
+                            rs.Data = db.Accounts.Where(o => o.UserName == tk && o.Password == mk).ToList();
                             // Chuyển hướng đến trang người dùng
                             Redirect("~/Users/user/index");
                         }
@@ -79,7 +79,8 @@ namespace test1.Controllers
                 rs.Data = null;
             }
 
-            return JsonConvert.SerializeObject(rs);
+            return JsonConvert.SerializeObject(rs)
+           ;
         }
     }
 }

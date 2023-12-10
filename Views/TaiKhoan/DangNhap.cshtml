@@ -120,7 +120,22 @@
                         contentType: false,
                         cache: false,
                         success: function (response) {
-                            alert(response);
+                            var rs = JSON.parse(response);
+                            console.log(rs.Data);
+                            if (rs.ErrCode == 1) {
+                                const accountin4 = rs.Data;
+                                if (accountin4[0].IsAdmin == true) {
+                                    console.log(window.location);
+                                    window.location.href = "/admin/addproducts";
+                                } else {
+                                    window.location.href = "/Users/user/index";
+                                }
+
+                            }
+                            else {
+                                alert(rs.ErrDesc);
+                            }
+
                         },
                         error: function (response) {
                             alert("Xử lý thêm mới thất bại");
