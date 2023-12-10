@@ -33,9 +33,6 @@ namespace test1.Models
     partial void InsertCategory(Category instance);
     partial void UpdateCategory(Category instance);
     partial void DeleteCategory(Category instance);
-    partial void InsertProduct(Product instance);
-    partial void UpdateProduct(Product instance);
-    partial void DeleteProduct(Product instance);
     partial void InsertAccount(Account instance);
     partial void UpdateAccount(Account instance);
     partial void DeleteAccount(Account instance);
@@ -48,13 +45,17 @@ namespace test1.Models
     partial void InsertInvoiceDetail(InvoiceDetail instance);
     partial void UpdateInvoiceDetail(InvoiceDetail instance);
     partial void DeleteInvoiceDetail(InvoiceDetail instance);
+    partial void InsertProduct(Product instance);
+    partial void UpdateProduct(Product instance);
+    partial void DeleteProduct(Product instance);
         #endregion
 
         public DatabaseDataContext() :
-                base(global::System.Configuration.ConfigurationManager.ConnectionStrings["QuanLySanPhamConnectionString"].ConnectionString, mappingSource)
+        base(global::System.Configuration.ConfigurationManager.ConnectionStrings["QuanLySanPhamConnectionString"].ConnectionString, mappingSource)
         {
             OnCreated();
         }
+
         public DatabaseDataContext(string connection) : 
 				base(connection, mappingSource)
 		{
@@ -87,14 +88,6 @@ namespace test1.Models
 			}
 		}
 		
-		public System.Data.Linq.Table<Product> Products
-		{
-			get
-			{
-				return this.GetTable<Product>();
-			}
-		}
-		
 		public System.Data.Linq.Table<Account> Accounts
 		{
 			get
@@ -124,6 +117,14 @@ namespace test1.Models
 			get
 			{
 				return this.GetTable<InvoiceDetail>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Product> Products
+		{
+			get
+			{
+				return this.GetTable<Product>();
 			}
 		}
 	}
@@ -309,308 +310,6 @@ namespace test1.Models
 					this._UpdatedOnUtc = value;
 					this.SendPropertyChanged("UpdatedOnUtc");
 					this.OnUpdatedOnUtcChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Product")]
-	public partial class Product : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _ID;
-		
-		private string _NameProduct;
-		
-		private System.Nullable<int> _CategoryID;
-		
-		private string _Description;
-		
-		private System.Nullable<double> _Price;
-		
-		private System.Nullable<double> _PriceDiscount;
-		
-		private System.Nullable<bool> _isDelete;
-		
-		private System.Nullable<bool> _ShowOnHomePage;
-		
-		private System.Nullable<System.DateTime> _CreatedOnUtc;
-		
-		private System.Nullable<System.DateTime> _UpdatedOnUtc;
-		
-		private string _URL;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIDChanging(int value);
-    partial void OnIDChanged();
-    partial void OnNameProductChanging(string value);
-    partial void OnNameProductChanged();
-    partial void OnCategoryIDChanging(System.Nullable<int> value);
-    partial void OnCategoryIDChanged();
-    partial void OnDescriptionChanging(string value);
-    partial void OnDescriptionChanged();
-    partial void OnPriceChanging(System.Nullable<double> value);
-    partial void OnPriceChanged();
-    partial void OnPriceDiscountChanging(System.Nullable<double> value);
-    partial void OnPriceDiscountChanged();
-    partial void OnisDeleteChanging(System.Nullable<bool> value);
-    partial void OnisDeleteChanged();
-    partial void OnShowOnHomePageChanging(System.Nullable<bool> value);
-    partial void OnShowOnHomePageChanged();
-    partial void OnCreatedOnUtcChanging(System.Nullable<System.DateTime> value);
-    partial void OnCreatedOnUtcChanged();
-    partial void OnUpdatedOnUtcChanging(System.Nullable<System.DateTime> value);
-    partial void OnUpdatedOnUtcChanged();
-    partial void OnURLChanging(string value);
-    partial void OnURLChanged();
-    #endregion
-		
-		public Product()
-		{
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int ID
-		{
-			get
-			{
-				return this._ID;
-			}
-			set
-			{
-				if ((this._ID != value))
-				{
-					this.OnIDChanging(value);
-					this.SendPropertyChanging();
-					this._ID = value;
-					this.SendPropertyChanged("ID");
-					this.OnIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NameProduct", DbType="NVarChar(100)")]
-		public string NameProduct
-		{
-			get
-			{
-				return this._NameProduct;
-			}
-			set
-			{
-				if ((this._NameProduct != value))
-				{
-					this.OnNameProductChanging(value);
-					this.SendPropertyChanging();
-					this._NameProduct = value;
-					this.SendPropertyChanged("NameProduct");
-					this.OnNameProductChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CategoryID", DbType="Int")]
-		public System.Nullable<int> CategoryID
-		{
-			get
-			{
-				return this._CategoryID;
-			}
-			set
-			{
-				if ((this._CategoryID != value))
-				{
-					this.OnCategoryIDChanging(value);
-					this.SendPropertyChanging();
-					this._CategoryID = value;
-					this.SendPropertyChanged("CategoryID");
-					this.OnCategoryIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Description", DbType="NVarChar(500)")]
-		public string Description
-		{
-			get
-			{
-				return this._Description;
-			}
-			set
-			{
-				if ((this._Description != value))
-				{
-					this.OnDescriptionChanging(value);
-					this.SendPropertyChanging();
-					this._Description = value;
-					this.SendPropertyChanged("Description");
-					this.OnDescriptionChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Price", DbType="Float")]
-		public System.Nullable<double> Price
-		{
-			get
-			{
-				return this._Price;
-			}
-			set
-			{
-				if ((this._Price != value))
-				{
-					this.OnPriceChanging(value);
-					this.SendPropertyChanging();
-					this._Price = value;
-					this.SendPropertyChanged("Price");
-					this.OnPriceChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PriceDiscount", DbType="Float")]
-		public System.Nullable<double> PriceDiscount
-		{
-			get
-			{
-				return this._PriceDiscount;
-			}
-			set
-			{
-				if ((this._PriceDiscount != value))
-				{
-					this.OnPriceDiscountChanging(value);
-					this.SendPropertyChanging();
-					this._PriceDiscount = value;
-					this.SendPropertyChanged("PriceDiscount");
-					this.OnPriceDiscountChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_isDelete", DbType="Bit")]
-		public System.Nullable<bool> isDelete
-		{
-			get
-			{
-				return this._isDelete;
-			}
-			set
-			{
-				if ((this._isDelete != value))
-				{
-					this.OnisDeleteChanging(value);
-					this.SendPropertyChanging();
-					this._isDelete = value;
-					this.SendPropertyChanged("isDelete");
-					this.OnisDeleteChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ShowOnHomePage", DbType="Bit")]
-		public System.Nullable<bool> ShowOnHomePage
-		{
-			get
-			{
-				return this._ShowOnHomePage;
-			}
-			set
-			{
-				if ((this._ShowOnHomePage != value))
-				{
-					this.OnShowOnHomePageChanging(value);
-					this.SendPropertyChanging();
-					this._ShowOnHomePage = value;
-					this.SendPropertyChanged("ShowOnHomePage");
-					this.OnShowOnHomePageChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreatedOnUtc", DbType="Date")]
-		public System.Nullable<System.DateTime> CreatedOnUtc
-		{
-			get
-			{
-				return this._CreatedOnUtc;
-			}
-			set
-			{
-				if ((this._CreatedOnUtc != value))
-				{
-					this.OnCreatedOnUtcChanging(value);
-					this.SendPropertyChanging();
-					this._CreatedOnUtc = value;
-					this.SendPropertyChanged("CreatedOnUtc");
-					this.OnCreatedOnUtcChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UpdatedOnUtc", DbType="Date")]
-		public System.Nullable<System.DateTime> UpdatedOnUtc
-		{
-			get
-			{
-				return this._UpdatedOnUtc;
-			}
-			set
-			{
-				if ((this._UpdatedOnUtc != value))
-				{
-					this.OnUpdatedOnUtcChanging(value);
-					this.SendPropertyChanging();
-					this._UpdatedOnUtc = value;
-					this.SendPropertyChanged("UpdatedOnUtc");
-					this.OnUpdatedOnUtcChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_URL", DbType="NText", UpdateCheck=UpdateCheck.Never)]
-		public string URL
-		{
-			get
-			{
-				return this._URL;
-			}
-			set
-			{
-				if ((this._URL != value))
-				{
-					this.OnURLChanging(value);
-					this.SendPropertyChanging();
-					this._URL = value;
-					this.SendPropertyChanged("URL");
-					this.OnURLChanged();
 				}
 			}
 		}
@@ -1195,6 +894,308 @@ namespace test1.Models
 					this._Quantity = value;
 					this.SendPropertyChanged("Quantity");
 					this.OnQuantityChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Product")]
+	public partial class Product : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _ID;
+		
+		private string _NameProduct;
+		
+		private string _CategoryName;
+		
+		private string _Description;
+		
+		private System.Nullable<double> _Price;
+		
+		private System.Nullable<double> _PriceDiscount;
+		
+		private System.Nullable<bool> _isDelete;
+		
+		private System.Nullable<bool> _ShowOnHomePage;
+		
+		private System.Nullable<System.DateTime> _CreatedOnUtc;
+		
+		private System.Nullable<System.DateTime> _UpdatedOnUtc;
+		
+		private string _URL;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDChanging(int value);
+    partial void OnIDChanged();
+    partial void OnNameProductChanging(string value);
+    partial void OnNameProductChanged();
+    partial void OnCategoryNameChanging(string value);
+    partial void OnCategoryNameChanged();
+    partial void OnDescriptionChanging(string value);
+    partial void OnDescriptionChanged();
+    partial void OnPriceChanging(System.Nullable<double> value);
+    partial void OnPriceChanged();
+    partial void OnPriceDiscountChanging(System.Nullable<double> value);
+    partial void OnPriceDiscountChanged();
+    partial void OnisDeleteChanging(System.Nullable<bool> value);
+    partial void OnisDeleteChanged();
+    partial void OnShowOnHomePageChanging(System.Nullable<bool> value);
+    partial void OnShowOnHomePageChanged();
+    partial void OnCreatedOnUtcChanging(System.Nullable<System.DateTime> value);
+    partial void OnCreatedOnUtcChanged();
+    partial void OnUpdatedOnUtcChanging(System.Nullable<System.DateTime> value);
+    partial void OnUpdatedOnUtcChanged();
+    partial void OnURLChanging(string value);
+    partial void OnURLChanged();
+    #endregion
+		
+		public Product()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this.OnIDChanging(value);
+					this.SendPropertyChanging();
+					this._ID = value;
+					this.SendPropertyChanged("ID");
+					this.OnIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NameProduct", DbType="NVarChar(100)")]
+		public string NameProduct
+		{
+			get
+			{
+				return this._NameProduct;
+			}
+			set
+			{
+				if ((this._NameProduct != value))
+				{
+					this.OnNameProductChanging(value);
+					this.SendPropertyChanging();
+					this._NameProduct = value;
+					this.SendPropertyChanged("NameProduct");
+					this.OnNameProductChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CategoryName", DbType="NChar(10)")]
+		public string CategoryName
+		{
+			get
+			{
+				return this._CategoryName;
+			}
+			set
+			{
+				if ((this._CategoryName != value))
+				{
+					this.OnCategoryNameChanging(value);
+					this.SendPropertyChanging();
+					this._CategoryName = value;
+					this.SendPropertyChanged("CategoryName");
+					this.OnCategoryNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Description", DbType="NVarChar(500)")]
+		public string Description
+		{
+			get
+			{
+				return this._Description;
+			}
+			set
+			{
+				if ((this._Description != value))
+				{
+					this.OnDescriptionChanging(value);
+					this.SendPropertyChanging();
+					this._Description = value;
+					this.SendPropertyChanged("Description");
+					this.OnDescriptionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Price", DbType="Float")]
+		public System.Nullable<double> Price
+		{
+			get
+			{
+				return this._Price;
+			}
+			set
+			{
+				if ((this._Price != value))
+				{
+					this.OnPriceChanging(value);
+					this.SendPropertyChanging();
+					this._Price = value;
+					this.SendPropertyChanged("Price");
+					this.OnPriceChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PriceDiscount", DbType="Float")]
+		public System.Nullable<double> PriceDiscount
+		{
+			get
+			{
+				return this._PriceDiscount;
+			}
+			set
+			{
+				if ((this._PriceDiscount != value))
+				{
+					this.OnPriceDiscountChanging(value);
+					this.SendPropertyChanging();
+					this._PriceDiscount = value;
+					this.SendPropertyChanged("PriceDiscount");
+					this.OnPriceDiscountChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_isDelete", DbType="Bit")]
+		public System.Nullable<bool> isDelete
+		{
+			get
+			{
+				return this._isDelete;
+			}
+			set
+			{
+				if ((this._isDelete != value))
+				{
+					this.OnisDeleteChanging(value);
+					this.SendPropertyChanging();
+					this._isDelete = value;
+					this.SendPropertyChanged("isDelete");
+					this.OnisDeleteChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ShowOnHomePage", DbType="Bit")]
+		public System.Nullable<bool> ShowOnHomePage
+		{
+			get
+			{
+				return this._ShowOnHomePage;
+			}
+			set
+			{
+				if ((this._ShowOnHomePage != value))
+				{
+					this.OnShowOnHomePageChanging(value);
+					this.SendPropertyChanging();
+					this._ShowOnHomePage = value;
+					this.SendPropertyChanged("ShowOnHomePage");
+					this.OnShowOnHomePageChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreatedOnUtc", DbType="Date")]
+		public System.Nullable<System.DateTime> CreatedOnUtc
+		{
+			get
+			{
+				return this._CreatedOnUtc;
+			}
+			set
+			{
+				if ((this._CreatedOnUtc != value))
+				{
+					this.OnCreatedOnUtcChanging(value);
+					this.SendPropertyChanging();
+					this._CreatedOnUtc = value;
+					this.SendPropertyChanged("CreatedOnUtc");
+					this.OnCreatedOnUtcChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UpdatedOnUtc", DbType="Date")]
+		public System.Nullable<System.DateTime> UpdatedOnUtc
+		{
+			get
+			{
+				return this._UpdatedOnUtc;
+			}
+			set
+			{
+				if ((this._UpdatedOnUtc != value))
+				{
+					this.OnUpdatedOnUtcChanging(value);
+					this.SendPropertyChanging();
+					this._UpdatedOnUtc = value;
+					this.SendPropertyChanged("UpdatedOnUtc");
+					this.OnUpdatedOnUtcChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_URL", DbType="NText", UpdateCheck=UpdateCheck.Never)]
+		public string URL
+		{
+			get
+			{
+				return this._URL;
+			}
+			set
+			{
+				if ((this._URL != value))
+				{
+					this.OnURLChanging(value);
+					this.SendPropertyChanging();
+					this._URL = value;
+					this.SendPropertyChanged("URL");
+					this.OnURLChanged();
 				}
 			}
 		}

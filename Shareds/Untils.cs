@@ -9,9 +9,9 @@ namespace test1.Shareds
     {
         public static bool check_login(HttpSessionStateBase Session)
         {
-            if (System.Web.HttpContext.Current.Session["is_login"] != null)
+            if (System.Web.HttpContext.Current.Session["admin"] != null && System.Web.HttpContext.Current.Session["user"] != null)
             {
-                if ((bool)Session["is_login"])
+                if ((bool)Session["admin"] || (bool)Session["user"])
                 {
                     //trường hợp đã login rồi
                     return true;

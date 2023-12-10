@@ -16,9 +16,10 @@ namespace test1.Controllers
         // GET: Admin
         public ActionResult Index()
         {
-            if (System.Web.HttpContext.Current.Session["is_login"] != null)
+
+            if (System.Web.HttpContext.Current.Session["admin"] != null)
             {
-                if ((bool)Session["is_login"])
+                if ((bool)Session["admin"])
                 {
                     //trường hợp đã login rồi
                     return View();
@@ -28,46 +29,62 @@ namespace test1.Controllers
         }
         public ActionResult tables()
         {
-            //Kiểm tra đăng nhập trước khi cho phép truy cập vào trang 
-            if (Shareds.Utils.check_login(Session))
+            if (System.Web.HttpContext.Current.Session["admin"] != null)
             {
-                return View();
+                if ((bool)Session["admin"])
+                {
+                    //trường hợp đã login rồi
+                    return View();
+                }
             }
             return RedirectToAction("DangNhap", "TaiKhoan");
         }
         public ActionResult productviews()
         {
-            //Kiểm tra đăng nhập trước khi cho phép truy cập vào trang 
-            if (Shareds.Utils.check_login(Session))
+            if (System.Web.HttpContext.Current.Session["admin"] != null)
             {
-                return View();
+                if ((bool)Session["admin"])
+                {
+                    //trường hợp đã login rồi
+                    return View();
+                }
             }
             return RedirectToAction("DangNhap", "TaiKhoan");
         }
         public ActionResult dashboard()
         {
-            //Kiểm tra đăng nhập trước khi cho phép truy cập vào trang 
-            if (Shareds.Utils.check_login(Session))
+            if (System.Web.HttpContext.Current.Session["admin"] != null)
             {
-                return View();
+                if ((bool)Session["admin"])
+                {
+                    //trường hợp đã login rồi
+                    return View();
+                }
             }
             return RedirectToAction("DangNhap", "TaiKhoan");
         }
         public ActionResult addproducts()
         {
-            //Kiểm tra đăng nhập trước khi cho phép truy cập vào trang 
-            if (Shareds.Utils.check_login(Session))
+            if (System.Web.HttpContext.Current.Session["admin"] != null)
             {
-                return View();
+                if ((bool)Session["admin"])
+                {
+                    //trường hợp đã login rồi
+                    return View();
+                }
             }
             return RedirectToAction("DangNhap", "TaiKhoan");
         }
         public ActionResult editproducts()
         {
             //Kiểm tra đăng nhập trước khi cho phép truy cập vào trang 
-            if (Shareds.Utils.check_login(Session))
+            if (System.Web.HttpContext.Current.Session["admin"] != null)
             {
-                return View();
+                if ((bool)Session["admin"])
+                {
+                    //trường hợp đã login rồi
+                    return View();
+                }
             }
             return RedirectToAction("DangNhap", "TaiKhoan");
         }

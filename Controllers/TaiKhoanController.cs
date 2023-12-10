@@ -37,7 +37,7 @@ namespace test1.Controllers
                         //kiem tra admin
                         if (qr.IsAdmin == true)
                         {
-                            Session["is_login"] = true;
+                            Session["admin"] = true;
                             //trường hợp có dữ liệu                        
                             rs.ErrCode = EnumErrCode.Success;
                             rs.ErrDesc = "Đăng nhập hệ thống admin thành công";
@@ -47,7 +47,7 @@ namespace test1.Controllers
                         }
                         else // Nếu isAdmin là 0 hoac null
                         {
-                            Session["is_login"] = true;
+                            Session["user"] = true;
                             //trường hợp có dữ liệu                        
                             rs.ErrCode = EnumErrCode.Success;
                             rs.ErrDesc = "Đăng nhập hệ thống user thành công";
