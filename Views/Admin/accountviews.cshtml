@@ -85,8 +85,8 @@
                         <div class="col-sm-4 col-md-3">
                             <select id="slc_search_type" class="form-control">
                                 <option value="">Chọn tiêu chí tìm kiếm</option>
-                                <option value="mssv">ID</option>
-                                <option value="hoten">Account's Name</option>
+                                <option value="ID">ID</option>
+                                <option value="AccountName">Account's Name</option>
                             </select>
                         </div>
                         <div class="col-sm-2 col-md-1 right"><button id="btn_search_action" class="btn btn-primary"><i class="fa fa-search"></i></button></div>
@@ -230,7 +230,7 @@
                         //console.log(rs.Data);
                         var str = "";
                         for (var i = 0; i < rs.Data.length; i++) {
-                            str += "<tr> <td> " + rs.Data[i].ID + " </td><td> " + rs.Data[i].UserName + "</td> <td><a href='./editaccounts?a-id=" + rs.Data[i].ID + "' class=' btn  btn-outline-warning border-0'> <i class='fa fa-pen' > </i> </a> <button type='button' onclick='Delete_obj(" + rs.Data[i].ID + ")' class='btn btn-outline-danger border-0'> <i class='fa fa-trash' > </i> </button> </td> </tr>";
+                            str += "<tr> <td> " + rs.Data[i].ID + " </td><td> " + rs.Data[i].UserName + "</td> <td><a href='./editaccounts?a-id=" + rs.Data[i].ID + "' class=' btn  btn-outline-warning border-0'> <i class='fa fa-pen' > </i> </a>  </td> </tr>";
                         }
                         $("#tbl_data").html(str);
                     }
@@ -261,7 +261,7 @@
                     type: "POST",
                     data: formData,
                     contentType: "application/json; charset=utf-8",
-                    url: window.location.origin + '/QLSV/Search_SV',
+                    url: window.location.origin + '/QLSV/Search_acc',
                     processData: false,
                     contentType: false,
                     cache: false,
@@ -273,7 +273,7 @@
                             //console.log(rs.Data);
                             var str = "";
                             for (var i = 0; i < rs.Data.length; i++) {
-                                str += "<tr> <td> " + (i + 1) + "</td> <td> " + rs.Data[i].MSSV + " </td><td> " + rs.Data[i].HoTen + "</td> <td><a href='./SuaSV?mssv=" + rs.Data[i].MSSV + "' class=' btn  btn-outline-warning border-0'> <i class='fa fa-pen' > </i> </a> <button type='button' onclick='Delete_obj(" + rs.Data[i].MSSV + ")' class='btn btn-outline-danger border-0'> <i class='fa fa-trash' > </i> </button> </td> </tr>";
+                                str += "<tr> <td> " + rs.Data[i].ID + " </td><td> " + rs.Data[i].UserName + "</td> <td><a href='./editaccounts?a-id=" + rs.Data[i].ID + "' class=' btn  btn-outline-warning border-0'> <i class='fa fa-pen' > </i> </a>  </td> </tr>";
                             }
                             $("#tbl_data").html(str);
                         }
