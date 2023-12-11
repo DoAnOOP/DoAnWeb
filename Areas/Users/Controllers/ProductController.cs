@@ -11,19 +11,51 @@ namespace test1.Areas.Users.Controllers
         // GET: Users/Product
         public ActionResult Product2()
         {
-            return View();
+            if (System.Web.HttpContext.Current.Session["user"] != null)
+            {
+                if ((bool)Session["user"])
+                {
+                    //trường hợp đã login rồi
+                    return View();
+                }
+            }
+            return Redirect("~/TaiKhoan/DangNhap"); 
         }
         public ActionResult categorie()
         {
-            return View();
+            if (System.Web.HttpContext.Current.Session["user"] != null)
+            {
+                if ((bool)Session["user"])
+                {
+                    //trường hợp đã login rồi
+                    return View();
+                }
+            }
+            return Redirect("~/TaiKhoan/DangNhap");
         }
         public ActionResult cart()
         {
-            return View();
+            if (System.Web.HttpContext.Current.Session["user"] != null)
+            {
+                if ((bool)Session["user"])
+                {
+                    //trường hợp đã login rồi
+                    return View();
+                }
+            }
+            return Redirect("~/TaiKhoan/DangNhap");
         }
         public ActionResult checkout()
         {
-            return View();
+            if (System.Web.HttpContext.Current.Session["user"] != null)
+            {
+                if ((bool)Session["user"])
+                {
+                    //trường hợp đã login rồi
+                    return View();
+                }
+            }
+            return Redirect("~/TaiKhoan/DangNhap");
         }
     }
 }
