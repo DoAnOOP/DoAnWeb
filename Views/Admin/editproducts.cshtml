@@ -1,5 +1,5 @@
-﻿@{
-    ViewBag.Title = "addproducts";
+﻿﻿@{
+    ViewBag.Title = "editproducts";
     Layout = "~/Views/Shared/_Layout.cshtml";
     <script src="~/Content/assets/js/core/jquery.min.js"></script>
     <link href="~/Content/assets/css/uploader.css" rel="stylesheet" />
@@ -39,6 +39,11 @@
                             <input type="text" class="text-field" placeholder="https://photos.google.com/photo/...."
                                    name="p-image" id='p-image' required readonly />
                         </div>
+                        <div class="custom-dropdown text-input">
+                            <label for="p-category" class="text-label">Product's Category:</label>
+                            <select name="p-category" id="p-category">
+                            </select>
+                        </div>
                         <div class="text-input">
                             <label for="p-name" class="text-label">Product's name:</label>
                             <input type="text" class="text-field" placeholder="Denim pant..." name="p-name" id='p-name'
@@ -64,7 +69,40 @@
 
 
 <script src="~/Content/assets/js/uploader.js"></script>
+<script>
+    $(document).ready(function () {
+        $.ajax(
+            {
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                url: window.location.origin + '/Admin/get_Category',
+                processData: false,
+                contentType: false,
+                cache: false,
+                success: function (response) {
+                    var rs = JSON.parse(response);
 
+                    if (rs.ErrCode == 1) {
+                        console.log(rs.Data)
+                        const categories = rs.Data
+                        let displayCategories = categories.map(function (item) {
+                            return `<option value="${item.NameCategory}">${item.NameCategory}</option>`
+                        })
+                        displayCategories = displayCategories.join("")
+                        console.log(displayCategories)
+                        document.getElementById("p-category").innerHTML = displayCategories
+                    }
+                    else {
+                        alert(rs.ErrDesc);
+                    }
+                },
+                error: function (response) {
+                    alert("Lấy DSSP thất bại");
+                }
+            }
+        );
+    })
+</script>
 <script>
     document.getElementById("file-upload").addEventListener("change", (e) => {
         e.preventDefault();
@@ -119,7 +157,7 @@
 
                 },
                 error: function (response) {
-                    alert("Xử lý lấy thông tin sinh viên cần sửa thất bại");
+                    alert("Xử lý lấy thông tin sản phẩm cần sửa thất bại");
                 }
             }
         );
@@ -139,7 +177,7 @@
                 type: "POST",
                 data: formData,
                 contentType: "application/json; charset=utf-8",
-                url: window.location.origin + '/Admin/Edit',
+                url: window.location.origin + '/Admin/Edit_prd',
                 processData: false,
                 contentType: false,
                 cache: false,
@@ -148,7 +186,7 @@
                     window.location = "productviews";
                 },
                 error: function (response) {
-                    alert("Xử lý cập nhật thông tin sv thất bại");
+                    alert("Xử lý cập nhật thông tin sản phẩm thất bại");
                 }
             }
         );

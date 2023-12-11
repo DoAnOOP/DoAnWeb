@@ -1,0 +1,298 @@
+﻿@{
+    ViewBag.Title = "categoryviews";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    <script src="~/Content/assets/js/core/jquery.min.js"></script>
+    <link href="~/Content/assets/css/black-uploader.css" rel="stylesheet" />
+}
+<style>
+    .button {
+        --main-focus: #2d8cf0;
+        --font-color: #323232;
+        --bg-color-sub: #dedede;
+        --bg-color: #eee;
+        --main-color: #323232;
+        position: relative;
+        width: 150px;
+        height: 40px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        border: 2px solid var(--main-color);
+        box-shadow: 4px 4px var(--main-color);
+        background-color: var(--bg-color);
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+    .button, .button__icon, .button__text {
+        transition: all 0.3s;
+    }
+
+        .button .button__text {
+            transform: translateX(22px);
+            color: var(--font-color);
+            font-weight: 600;
+        }
+
+        .button .button__icon {
+            position: absolute;
+            transform: translateX(109px);
+            height: 100%;
+            width: 39px;
+            background-color: var(--bg-color-sub);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .button .svg {
+            width: 20px;
+            fill: var(--main-color);
+        }
+
+        .button:active {
+            transform: translate(3px, 3px);
+            box-shadow: 0px 0px var(--main-color);
+        }
+</style>
+<section class="content">
+    <div class="container-fluid">
+        <div id="div_test"> </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Danh sách Category</h3>
+                        <div>
+                            <button class="button" type="button">
+                                <a class="button__text" href="addcategories">
+                                    Add Categories </a>
+                                    <span class="button__icon"><svg class="svg" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><line x1="12" x2="12" y1="5" y2="19"></line><line x1="5" x2="19" y1="12" y2="12"></line></svg></span>
+                            </button>
+                        </div>
+                        <div id="div_search" class="row">
+                            <div class="col-sm-2 col-md-3 right">
+                            </div>
+                            <div class="col-sm-4 col-md-5 right">
+                                <input name="txt_search_val" id="txt_search_val" class="form-control" type="text" placeholder="Nhập giá trị tìm kiếm" />
+                            </div>
+                            <div class="col-sm-4 col-md-3">
+                                <select id="slc_search_type" class="form-control">
+                                    <option value="">Chọn tiêu chí tìm kiếm</option>
+                                    <option value="mssv">ID</option>
+                                    <option value="hoten">NameCate</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-2 col-md-1 right"><button id="btn_search_action" class="btn btn-primary"><i class="fa fa-search"></i></button></div>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <table class="table table-bordered table-border-grey">
+                                <thead>
+                                    <tr class="bg-primary ">
+                                        <th>ID</th>
+                                        <th>NameCate</th>
+                                        <th style="width: 110px">Thao tác</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tbl_data">
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /.card-body -->
+                        @*<div class="card-footer clearfix">
+            <ul class="pagination pagination-sm m-0 float-right">
+                <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
+            </ul>
+        </div>*@
+                    </div>
+                    <!-- /.card -->
+                </div>
+            </div>
+            <!-- /.row -->
+        </div><!-- /.container-fluid -->
+</section>
+
+@*<script>
+        $(document).ready(function () {
+            $.ajax(
+                {
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    url: window.location.origin + '/Admin/get_All_cate',
+                    processData: false,
+                    contentType: false,
+                    cache: false,
+                    success: function (response) {
+                        var rs = JSON.parse(response);
+                        if (rs.ErrCode == 1) {
+                            console.log(rs.Data)
+                            const category = rs.Data
+                            let displaycategory = category.map(function (item) {
+                                return `<div class="mix col-lg-3 col-md-6 best">
+                     <div class="category-item">
+
+
+
+                         <div class="category-info">
+                             <h6>${item.NameCategory}</h6>
+                             <div>
+                                 <a href="./removecategory?c-id=${item.ID}" class="site-btn btn-line">REMOVE</a>
+                                 <a href="./editcategories?c-id=${item.ID}" class="site-btn btn-line">EDIT</a>
+                             </div>
+                         </div>
+                     </div>
+                 </div>`;
+                            });
+                            displaycategory = displaycategory.join("");
+                            displaycategory += `<div class="mix col-lg-3 col-md-6 best">
+                            <div>
+                                <a class="add-category-btn" href="addcategory">
+                                    <i class="tim-icons icon-simple-add"></i>
+                                </a>
+                            </div>
+                        </div>`
+                            console.log(displaycategory);
+                            document.getElementById("category-filter").innerHTML = displaycategory;
+                        }
+                        else {
+                            alert(rs.ErrDesc);
+                        }
+                    },
+                    error: function (response) {
+                        alert("Lấy DSSP thất bại");
+                    }
+                }
+            );
+        })
+    </script>*@
+<!-- Cai nay neu can thiet thi cho vao dong 103 -->
+<!-- <figure>
+    <img src="${item.URL}" alt="">
+    <div class="pi-meta">
+        <div class="pi-m-left">
+            <img src="/Content/assets/img/icons/eye.png" alt="">
+            <p>quick view</p>
+        </div>
+        <div class="pi-m-right">
+            <img src="/Content/assets/img/icons/heart.png" alt="">
+            <p>save</p>
+        </div>
+    </div>
+</figure> -->
+
+<script>
+    function Delete_obj(id) {
+        if (confirm("Bạn có thực sự muốn xóa bản ghi có id=" + id + " này không?")) {
+            //xử lý xóa
+            /*alert("Đồng ý xóa");*/
+
+            //trường hợp không rỗng
+            var formData = new FormData();
+            formData.append("cateId", id);
+
+            $.ajax(
+                {
+                    type: "POST",
+                    data: formData,
+                    contentType: "application/json; charset=utf-8",
+                    url: window.location.origin + '/Admin/Del_Cate',
+                    processData: false,
+                    contentType: false,
+                    cache: false,
+                    success: function (response) {
+                        var rs = JSON.parse(response);
+                        alert(rs.ErrDesc);
+                        //refresh lại trang web để thấy thay đổi;
+                        window.location.href = "/admin/categoryviews";
+                    },
+                    error: function (response) {
+                        alert("Xóa sinh viên thất bại");
+                    }
+                }
+            );
+        }
+    };
+
+    $(document).ready(function () {
+        $.ajax(
+            {
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                //url: window.location.origin + '/QLSV/get_All',
+                url: window.location.origin + '/Admin/get_All_cate',
+                processData: false,
+                contentType: false,
+                cache: false,
+                success: function (response) {
+                    var rs = JSON.parse(response);
+
+                    if (rs.ErrCode == 1) {
+                        //trường hợp lấy dssv thành công
+                        //console.log(rs.Data);
+                        var str = "";
+                        for (var i = 0; i < rs.Data.length; i++) {
+                            str += "<tr> <td> " + rs.Data[i].ID + " </td> <td> " + rs.Data[i].NameCategory + "</td> <td><a href='/admin/editcategories?c-id=" + rs.Data[i].ID + "' class=' btn  btn-outline-warning border-0'> <i class='fa fa-pencial' > </i> </a> <button type='button' onclick='Delete_obj(" + rs.Data[i].ID + ")' class='btn btn-outline-danger border-0'> <i class='fa fa-trash' > </i> </button> </td> </tr>";
+                        }
+                        $("#tbl_data").html(str);
+                    }
+                    else {
+                        alert(rs.ErrDesc);
+                    }
+                },
+                error: function (response) {
+                    alert("Lấy DSCate thất bại");
+                }
+            }
+        );
+
+        $("#btn_search_action").click(function () {
+            //alert($("#txt_search_val").val());
+            var search_type = $("#slc_search_type").val();
+            //if (!search_type) {
+            //    alert("Vui lòng chọn tiêu chí tìm kiếm");
+            //    return false;
+            //}
+
+            var formData = new FormData();
+            formData.append("search_val", $("#txt_search_val").val());
+            formData.append("search_type", search_type);
+
+            $.ajax(
+                {
+                    type: "POST",
+                    data: formData,
+                    contentType: "application/json; charset=utf-8",
+                    url: window.location.origin + '/admin/Search_Cate',
+                    processData: false,
+                    contentType: false,
+                    cache: false,
+                    success: function (response) {
+                        var rs = JSON.parse(response);
+
+                        if (rs.ErrCode == 1) {
+                            //trường hợp lấy dssv thành công
+                            //console.log(rs.Data);
+                            var str = "";
+                            for (var i = 0; i < rs.Data.length; i++) {
+                                str += "<tr> <td> " + rs.Data[i].ID + " </td> <td> " + rs.Data[i].NameCategory + "</td> <td><a href='/admin/editcategories?c-id=" + rs.Data[i].ID + "' class=' btn  btn-outline-warning border-0'> <i class='fa fa-pencial' > </i> </a> <button type='button' onclick='Delete_obj(" + rs.Data[i].ID + ")' class='btn btn-outline-danger border-0'> <i class='fa fa-trash' > </i> </button> </td> </tr>";
+                            }
+                            $("#tbl_data").html(str);
+                        }
+                        else {
+                            alert(rs.ErrDesc);
+                        }
+                    },
+                    error: function (response) {
+                        alert("Xóa sinh viên thất bại");
+                    }
+                }
+            );
+        })
+    })
+
+</script>

@@ -1,0 +1,68 @@
+﻿@{
+    ViewBag.Title = "addaccounts";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    <script src="~/Content/assets/js/core/jquery.min.js"></script>
+    <link href="~/Content/assets/css/uploader.css" rel="stylesheet" />
+}
+
+<div class="row">
+    <div class="col-12">
+        <div class="card card-chart">
+            <div class="card-header ">
+                <div class="row">
+                    <div class="col-sm-6 text-left">
+                        <h5 class="card-category">Dashboard</h5>
+                        <h2 class="card-title">Adding accounts</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <form id="category-form" class="row">
+                    <div class="col-6">
+                        <div class="text-input">
+                            <label for="a-name" class="text-label">Account's username:</label>
+                            <input type="text" class="text-field" placeholder="Denim pant..." name="a-name" id='a-name'>
+                        </div>
+                        <div class="checkroles">
+                            <input type="checkbox" class="account-roles" name="a-roles" id="a-roles">
+                            <label for="a-roles" class="text-label">Is this account for admins?</label>
+                        </div>
+                        <input class="submit-btn" type="submit" value="Submit account's information">
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="~/Content/assets/js/uploader.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $(".submit-btn").click(function (e) {
+            e.preventDefault()
+            var form = $('#account-form')[0];
+            var formData = new FormData(form);
+
+            $.ajax(
+                {
+                    type: "POST",
+                    data: formData,
+                    contentType: "application/json; charset=utf-8",
+                    url: window.location.origin + '/Admin/Add_acc',
+                    processData: false,
+                    contentType: false,
+                    cache: false,
+                    success: function (response) {
+                        alert(response);
+                    },
+                    error: function (response) {
+                        alert("Xử lý thêm mới thất bại");
+                    }
+                }
+            )
+        })
+    })
+</script>

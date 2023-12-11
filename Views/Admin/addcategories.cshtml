@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "addcategories";
     Layout = "~/Views/Shared/_Layout.cshtml";
     <script src="~/Content/assets/js/core/jquery.min.js"></script>
@@ -20,36 +19,40 @@
             <div class="card-body">
                 <form id="category-form" class="row">
                     <div class="col-6">
-                        <div id="file-upload-form" class="uploader">
-                            <input id="file-upload" type="file" name="fileUpload" accept="image/*" required />
+                        <!-- <div id="file-upload-form" class="uploader">
+                                <input id="file-upload" type="file" name="fileUpload" accept="image/*" required />
 
-                            <label for="file-upload" id="file-drag">
-                                <img id="file-image" src="#" alt="Preview" class="hidden">
-                                <div id="start">
-                                    <i class="fa fa-download" aria-hidden="true"></i>
-                                    <div>Select a file or drag here</div>
-                                    <div id="notimage" class="hidden">Please select an image</div>
-                                    <span id="file-upload-btn" class="btn btn-primary">Select a file</span>
-                                </div>
-                            </label>
+                                <label for="file-upload" id="file-drag">
+                                    <img id="file-image" src="#" alt="Preview" class="hidden">
+                                    <div id="start">
+                                        <i class="fa fa-download" aria-hidden="true"></i>
+                                        <div>Select a file or drag here</div>
+                                        <div id="notimage" class="hidden">Please select an image</div>
+                                        <span id="file-upload-btn" class="btn btn-primary">Select a file</span>
+                                    </div>
+                                </label>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-6">
+                        <div class="col-6">
+                            <div class="text-input">
+                                <label for="c-image" class="text-label">Image's URL:</label>
+                                <input type="text" class="text-field" placeholder="https://photos.google.com/photo/...."
+                                       name="c-image" id='c-image' required />
+                            </div> -->
                         <div class="text-input">
-                            <label for="p-image" class="text-label">Image's URL:</label>
-                            <input type="text" class="text-field" placeholder="https://photos.google.com/photo/...."
-                                   name="p-image" id='p-image' required />
-                        </div>
-                        <div class="text-input">
-                            <label for="p-name" class="text-label">Category's name:</label>
-                            <input type="text" class="text-field" placeholder="Denim pant..." name="p-name" id='p-name'
+                            <label for="c-name" class="text-label">Category's name:</label>
+                            <input type="text" class="text-field" placeholder="Denim pant..." name="c-name" id='c-name'
                                    required />
                         </div>
-                        <div class="text-input">
-                            <label for="p-desc" class="text-label">Category's description:</label>
-                            <textarea class="text-field" rows="10" placeholder="This category will bring about....."
-                                      name="p-desc" id='p-desc' required></textarea>
-                        </div>
+                        <!-- <div class="text-input">
+                            <label for="c-show" class="text-label">:</label>
+                            <input value="1" type="hidden" class="text-field"  name="c-show" id='c-show'>
+                        </div> -->
+                        <!-- <div class="text-input">
+                            <label for="c-created" class="text-label">Category's Time:</label>
+                            <input class="text-field" rows="10" placeholder="This category will bring about....."
+                                      name="c-created" id='c-created' required>
+                        </div> -->
                         <input class="submit-btn" type="submit" value="Submit category's information">
                     </div>
 
@@ -86,7 +89,7 @@
         ).then((res) => res.json())
             .then((res) => {
                 console.log(res.data.url);
-                document.getElementById("p-image").value = res.data.url
+                document.getElementById("c-image").value = res.data.url
             })
     }
 </script>
@@ -103,7 +106,7 @@
                     type: "POST",
                     data: formData,
                     contentType: "application/json; charset=utf-8",
-                    url: window.location.origin + '/Admin/Add',
+                    url: window.location.origin + '/Admin/Add_cate',
                     processData: false,
                     contentType: false,
                     cache: false,

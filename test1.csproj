@@ -529,12 +529,16 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Admin\tables.cshtml" />
     <Content Include="Views\Admin\productviews.cshtml" />
-    <Content Include="Views\Admin\dashboard.cshtml" />
     <Content Include="Views\Admin\addproducts.cshtml" />
     <Content Include="Views\Admin\editproducts.cshtml" />
     <Content Include="Views\TaiKhoan\DangNhap.cshtml" />
+    <Content Include="Views\Admin\accountviews.cshtml" />
+    <Content Include="Views\Admin\addaccounts.cshtml" />
+    <Content Include="Views\Admin\addcategories.cshtml" />
+    <Content Include="Views\Admin\categoryviews.cshtml" />
+    <Content Include="Views\Admin\editaccounts.cshtml" />
+    <Content Include="Views\Admin\editcategories.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

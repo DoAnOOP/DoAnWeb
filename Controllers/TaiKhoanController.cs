@@ -10,8 +10,8 @@ namespace test1.Controllers
 {
     public class TaiKhoanController : Controller
     {
+        public DatabaseDataContext db = new DatabaseDataContext();
         // GET: TaiKhoan
-        DatabaseDataContext db = new DatabaseDataContext();
         // GET: Login/Login
         public ActionResult DangNhap()
         {
@@ -81,6 +81,37 @@ namespace test1.Controllers
 
             return JsonConvert.SerializeObject(rs)
            ;
+        }
+        public string DangKy_action()
+        {
+            string tkdk = Request["txt_tkdk"];
+            string mkdk = Request["txt_mkdk"];
+            string email = Request["txt_email"];
+
+            if (!string.IsNullOrEmpty(tkdk) && !string.IsNullOrEmpty(mkdk) && !string.IsNullOrEmpty(email))
+            {
+                try
+                {
+                    //trường hợp muốn insert
+                    Account taikhoan = new Account();
+                    taikhoan.UserName = tkdk;
+                    taikhoan.Password = mkdk;
+                    taikhoan.Email = email;
+
+                    db.Accounts.InsertOnSubmit(taikhoan);
+                    db.SubmitChanges();
+
+                    return "Tạo tài khoản thành công";
+                }
+                catch (Exception ex)
+                {
+                    return "Tạo tài khoản thất bại. Chi tiết lỗi: " + ex.Message;
+                }
+            }
+            else
+            {
+                return "Mày chơi tao không được đâu";
+            }
         }
     }
 }

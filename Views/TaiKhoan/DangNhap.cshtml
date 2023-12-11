@@ -45,21 +45,21 @@
                         </a>
                     </div>
                 </form>
-                <form action="#" class="sign-up-form">
+                <form action="#" class="sign-up-form" id="sign-up-form">
                     <h2 class="title">Sign up</h2>
                     <div class="input-field">
                         <i class="fas fa-user"></i>
-                        <input type="text" placeholder="Username" />
+                        <input type="text" name="txt_tkdk" id="txt_tkdk" placeholder="Username" />
                     </div>
                     <div class="input-field">
                         <i class="fas fa-envelope"></i>
-                        <input type="email" placeholder="Email" />
+                        <input type="email" name="txt_email" id="txt_email" placeholder="Email" />
                     </div>
                     <div class="input-field">
                         <i class="fas fa-lock"></i>
-                        <input type="password" placeholder="Password" />
+                        <input type="password" name="txt_mkdk" id="txt_mkdk" placeholder="Password" />
                     </div>
-                    <input type="submit" class="btn" value="Sign up" />
+                    <input type="submit" id="btn_dangky" class="btn" value="Sign up" />
                     <p class="social-text">Or Sign up with social platforms</p>
                     <div class="social-media">
                         <a href="#" class="social-icon">
@@ -135,6 +135,34 @@
                             else {
                                 alert(rs.ErrDesc);
                             }
+
+                        },
+                        error: function (response) {
+                            alert("Xử lý thêm mới thất bại");
+                        }
+                    }
+                )
+            })
+        })
+    </script>
+    <script>
+        $(document).ready(function () {
+            $("#btn_dangky").click(function (e) {
+                e.preventDefault()
+                var form = $('#sign-up-form')[0];
+                var formData = new FormData(form);
+                $.ajax(
+                    {
+                        type: "POST",
+                        data: formData,
+                        contentType: "application/json; charset=utf-8",
+                        url: window.location.origin + '/TaiKhoan/DangKy_action',
+                        processData: false,
+                        contentType: false,
+                        cache: false,
+                        success: function (response) {
+                            alert(response);
+
 
                         },
                         error: function (response) {
