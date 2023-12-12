@@ -1,5 +1,4 @@
-﻿﻿
-<!--
+﻿<!--
 =========================================================
 * * Black Dashboard - v1.0.1
 =========================================================
@@ -27,8 +26,14 @@
     <!-- CSS Files -->
     <link href="~/Content/assets/css/black-dashboard.css?v=1.0.0" rel="stylesheet" />
     <link href="~/Content/assets/css/black-dashboard.css" rel="stylesheet" />
-    <!-- CSS Just for demo purpose, don't include it in your project -->
-    <link href="~/Content/assets/demo/demo.css" rel="stylesheet" />
+
+
+    <!-- jQuery -->
+    <script src="~/Content/plugins/jquery/jquery.min.js"></script>
+    <!-- jQuery UI 1.11.4 -->
+    <script src="~/Content/plugins/jquery-ui/jquery-ui.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="~/Content/dist/js/adminlte.js"></script>
 </head>
 <body class="white-content">
     <div class="wrapper">
@@ -45,31 +50,76 @@
                         Creative Tim
                     </a>
                 </div>
-                <ul class="nav">
-                    <li>
-                        <a href="~/Admin/productviews">
-                            <i class="tim-icons icon-cart"></i>
-                            <p>Products</p>
+
+                <ul class="nav" data-widget="treeview" role="menu" data-accordion="false">
+
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-tachometer-alt"></i>
+                            <p>
+                                Product
+                            </p>
                         </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="~/Admin/productviews" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>List Product</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="~/Admin/addproducts" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Add Product</p>
+                                </a>
+                            </li>
+                        </ul>
                     </li>
-                    <!-- <li>
-                        <a href="~/Admin/addcategories">
-                            <i class="tim-icons icon-puzzle-10"></i>
-                            <p>Adding Categories</p>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-tachometer-alt"></i>
+                            <p>
+                                Category
+                            </p>
                         </a>
-                    </li> -->
-                    <li>
-                        <a href="~/Admin/categoryviews">
-                            <i class="tim-icons icon-cart"></i>
-                            <p>Categories</p>
-                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="~/Admin/categoryviews" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>List Category</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="~/Admin/addcategories" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Add Category</p>
+                                </a>
+                            </li>
+                        </ul>
                     </li>
-                    <li>
-                        <a href="~/Admin/accountviews">
-                            <i class="tim-icons icon-cart"></i>
-                            <p>Accounts</p>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-tachometer-alt"></i>
+                            <p>
+                                Account
+                            </p>
                         </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="~/Admin/accountviews" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>List Account</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="~/Admin/addaccounts" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Add Account</p>
+                                </a>
+                            </li>
+                        </ul>
                     </li>
+
                 </ul>
             </div>
         </div>
