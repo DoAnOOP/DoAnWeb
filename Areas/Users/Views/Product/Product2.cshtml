@@ -2,6 +2,7 @@
 @{
     ViewBag.Title = "Product2";
     Layout = "~/Areas/Users/Views/Shared/Layout.cshtml";
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
 }
 
 <!-- Page Info -->
@@ -24,34 +25,16 @@
         <div class="row">
             <div class="col-lg-6">
                 <figure>
-                    <img class="product-big-img" src="~/Content/img/product/1.jpg" alt="">
+                    <img id="p-image" class="product-big-img" src="~/Content/img/product/1.jpg" alt="">
                 </figure>
-                <div class="product-thumbs">
-                    <div class="product-thumbs-track">
-                        <div class="pt" data-imgbigurl="~/Content/img/product/1.jpg"><img src="~/Content/img/product/thumb-1.jpg" alt=""></div>
-                        <div class="pt" data-imgbigurl="~/Content/img/product/2.jpg"><img src="~/Content/img/product/thumb-2.jpg" alt=""></div>
-                        <div class="pt" data-imgbigurl="~/Content/img/product/3.jpg"><img src="~/Content/img/product/thumb-3.jpg" alt=""></div>
-                        <div class="pt" data-imgbigurl="~/Content/img/product/4.jpg"><img src="~/Content/img/product/thumb-4.jpg" alt=""></div>
-                    </div>
-                </div>
             </div>
             <div class="col-lg-6">
                 <div class="product-content">
-                    <h2>Black Shoulder bag</h2>
+                    <h2 id="p-name">Black Shoulder bag</h2>
                     <div class="pc-meta">
-                        <h4 class="price">$19.50</h4>
-                        <div class="review">
-                            <div class="rating">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star is-fade"></i>
-                            </div>
-                            <span>(2 reviews)</span>
-                        </div>
+                        <h4 id="p-price" class="price">$19.50</h4>
                     </div>
-                    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium dolore- mque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit</p>
+                    <p id="p-desc">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium dolore- mque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit</p>
                     <div class="color-choose">
                         <span>Colors:</span>
                         <div class="cs-item">
@@ -107,7 +90,7 @@
                     <div class="tab-content">
                         <!-- single tab content -->
                         <div class="tab-pane fade show active" id="tab-1" role="tabpanel" aria-labelledby="tab-1">
-                            <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit</p>
+                            <p id="p-descpls">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit</p>
                         </div>
                         <div class="tab-pane fade" id="tab-2" role="tabpanel" aria-labelledby="tab-2">
                             <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit</p>
@@ -217,3 +200,39 @@
     </div>
 </div>
 <!-- Page end -->
+
+<script>
+
+    $(document).ready(function () {
+        var url = new URL(window.location.href);
+        var productID = url.searchParams.get("p-id");
+
+        //trường hợp không rỗng
+        var formData = new FormData();
+        formData.append("productID", productID);
+
+        $.ajax(
+            {
+                type: "POST",
+                data: formData,
+                contentType: "application/json; charset=utf-8",
+                url: window.location.origin + '/Admin/get_SP_Info',
+                processData: false,
+                contentType: false,
+                cache: false,
+                success: function (response) {
+                    var data = JSON.parse(response);
+                    document.getElementById("p-image").src = data.URL;
+                    document.getElementById("p-desc").innerHTML = data.Description;
+                    document.getElementById("p-descpls").innerHTML = data.Description;
+                    document.getElementById("p-name").innerHTML = data.NameProduct;
+                    document.getElementById("p-price").innerHTML = data.Price;
+
+                },
+                error: function (response) {
+                    alert("Xử lý lấy thông tin sinh viên cần sửa thất bại");
+                }
+            }
+        );
+    })
+</script>

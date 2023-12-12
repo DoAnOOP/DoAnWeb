@@ -2,6 +2,7 @@
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Users/Views/Shared/Layout.cshtml";
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
 }
 
 <!-- Hero section -->
@@ -141,185 +142,6 @@
             <li class="control" data-filter=".best">Best sellers</li>
         </ul>
         <div class="row" id="product-filter">
-            <div class="mix col-lg-3 col-md-6 best">
-                <div class="product-item">
-                    <figure>
-                        <img src="~/Content/img/products/1.jpg" alt="">
-                        <div class="pi-meta">
-                            <div class="pi-m-left">
-                                <img src="~/Content/img/icons/eye.png" alt="">
-                                <p>quick view</p>
-                            </div>
-                            <div class="pi-m-right">
-                                <img src="~/Content/img/icons/heart.png" alt="">
-                                <p>save</p>
-                            </div>
-                        </div>
-                    </figure>
-                    <div class="product-info">
-                        <a href="~/product/product2" class="">Long red Shirt</a>
-                        <p>$39.90</p>
-                        <a href="~/product/cart" class="site-btn btn-line">ADD TO CART</a>
-                    </div>
-                </div>
-            </div>
-            <div class="mix col-lg-3 col-md-6 new">
-                <div class="product-item">
-                    <figure>
-                        <img src="~/Content/img/products/2.jpg" alt="">
-                        <div class="bache">NEW</div>
-                        <div class="pi-meta">
-                            <div class="pi-m-left">
-                                <img src="~/Content/img/icons/eye.png" alt="">
-                                <p>quick view</p>
-                            </div>
-                            <div class="pi-m-right">
-                                <img src="~/Content/img/icons/heart.png" alt="">
-                                <p>save</p>
-                            </div>
-                        </div>
-                    </figure>
-                    <div class="product-info">
-                        <a href="~/product/product2" class="">Hype grey shirt</a>
-                        <p>$19.50</p>
-                        <a href="~/product/cart" class="site-btn btn-line">ADD TO CART</a>
-                    </div>
-                </div>
-            </div>
-            <div class="mix col-lg-3 col-md-6 best">
-                <div class="product-item">
-                    <figure>
-                        <img src="~/Content/img/products/3.jpg" alt="">
-                        <div class="pi-meta">
-                            <div class="pi-m-left">
-                                <img src="~/Content/img/icons/eye.png" alt="">
-                                <p>quick view</p>
-                            </div>
-                            <div class="pi-m-right">
-                                <img src="~/Content/img/icons/heart.png" alt="">
-                                <p>save</p>
-                            </div>
-                        </div>
-                    </figure>
-                    <div class="product-info">
-                        <a href="~/product/product2" class="">long sleeve jacket</a>
-                        <p>$59.90</p>
-                        <a href="~/product/cart" class="site-btn btn-line">ADD TO CART</a>
-                    </div>
-                </div>
-            </div>
-            <div class="mix col-lg-3 col-md-6 new best">
-                <div class="product-item">
-                    <figure>
-                        <img src="~/Content/img/products/4.jpg" alt="">
-                        <div class="bache sale">SALE</div>
-                        <div class="pi-meta">
-                            <div class="pi-m-left">
-                                <img src="~/Content/img/icons/eye.png" alt="">
-                                <p>quick view</p>
-                            </div>
-                            <div class="pi-m-right">
-                                <img src="~/Content/img/icons/heart.png" alt="">
-                                <p>save</p>
-                            </div>
-                        </div>
-                    </figure>
-                    <div class="product-info">
-                        <a href="~/product/product2" class="">Denim men shirt</a>
-                        <p>$32.20 <span>RRP 64.40</span></p>
-                        <a href="~/product/cart" class="site-btn btn-line">ADD TO CART</a>
-                    </div>
-                </div>
-            </div>
-            <div class="mix col-lg-3 col-md-6 best">
-                <div class="product-item">
-                    <figure>
-                        <img src="~/Content/img/products/5.jpg" alt="">
-                        <div class="pi-meta">
-                            <div class="pi-m-left">
-                                <img src="~/Content/img/icons/eye.png" alt="">
-                                <p>quick view</p>
-                            </div>
-                            <div class="pi-m-right">
-                                <img src="~/Content/img/icons/heart.png" alt="">
-                                <p>save</p>
-                            </div>
-                        </div>
-                    </figure>
-                    <div class="product-info">
-                        <a href="~/product/product2" class="">Long red Shirt</a>
-                        <p>$39.90</p>
-                        <a href="~/product/cart" class="site-btn btn-line">ADD TO CART</a>
-                    </div>
-                </div>
-            </div>
-            <div class="mix col-lg-3 col-md-6 new">
-                <div class="product-item">
-                    <figure>
-                        <img src="~/Content/img/products/6.jpg" alt="">
-                        <div class="bache">NEW</div>
-                        <div class="pi-meta">
-                            <div class="pi-m-left">
-                                <img src="~/Content/img/icons/eye.png" alt="">
-                                <p>quick view</p>
-                            </div>
-                            <div class="pi-m-right">
-                                <img src="~/Content/img/icons/heart.png" alt="">
-                                <p>save</p>
-                            </div>
-                        </div>
-                    </figure>
-                    <div class="product-info">
-                        <a href="~/product/product2" class="">Hype grey shirt</a>
-                        <p>$19.50</p>
-                        <a href="~/product/cart" class="site-btn btn-line">ADD TO CART</a>
-                    </div>
-                </div>
-            </div>
-            <div class="mix col-lg-3 col-md-6 best">
-                <div class="product-item">
-                    <figure>
-                        <img src="~/Content/img/products/7.jpg" alt="">
-                        <div class="pi-meta">
-                            <div class="pi-m-left">
-                                <img src="~/Content/img/icons/eye.png" alt="">
-                                <p>quick view</p>
-                            </div>
-                            <div class="pi-m-right">
-                                <img src="~/Content/img/icons/heart.png" alt="">
-                                <p>save</p>
-                            </div>
-                        </div>
-                    </figure>
-                    <div class="product-info">
-                        <a href="~/product/product2" class="">long sleeve jacket</a>
-                        <p>$59.90</p>
-                        <a href="~/product/cart" class="site-btn btn-line">ADD TO CART</a>
-                    </div>
-                </div>
-            </div>
-            <div class="mix col-lg-3 col-md-6 best">
-                <div class="product-item">
-                    <figure>
-                        <img src="~/Content/img/products/8.jpg" alt="">
-                        <div class="pi-meta">
-                            <div class="pi-m-left">
-                                <img src="~/Content/img/icons/eye.png" alt="">
-                                <p>quick view</p>
-                            </div>
-                            <div class="pi-m-right">
-                                <img src="~/Content/img/icons/heart.png" alt="">
-                                <p>save</p>
-                            </div>
-                        </div>
-                    </figure>
-                    <div class="product-info">
-                        <a href="~/product/product2" class="">Denim men shirt</a>
-                        <p>$32.20 <span>RRP 64.40</span></p>
-                        <a href="~/product/cart" class="site-btn btn-line">ADD TO CART</a>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 </section>
@@ -371,3 +193,58 @@
     </div>
 </section>
 <!-- Blog section end -->
+
+<script>
+    $(document).ready(function () {
+        $.ajax(
+            {
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                url: window.location.origin + '/Admin/get_All',
+                processData: false,
+                contentType: false,
+                cache: false,
+                success: function (response) {
+                    var rs = JSON.parse(response);
+
+                    if (rs.ErrCode == 1) {
+                        console.log(rs.Data)
+                        const products = rs.Data
+                        let displayProducts = products.map(function (item) {
+                            return `<div class="mix col-lg-3 col-md-6 best">
+                 <div class="product-item">
+                     <figure>
+                         <img src="${item.URL}" alt="">
+                         <div class="pi-meta">
+                             <a href="../Product/Product2?p-id=${item.ID}" class="pi-m-left">
+                                 <img src="/Content/assets/img/icons/eye.png" alt="">
+                                 <p>quick view</p>
+                             </a>
+                         </div>
+                     </figure>
+                     <div class="product-info">
+                         <h6>${item.NameProduct}</h6>
+                         <p>${"$" + item.Price}</p>
+                         <div>
+                            <a href="~/product/cart" class="site-btn btn-line">ADD TO CART</a>
+                         </div>
+                     </div>
+                 </div>
+             </div>`;
+                        });
+                        displayProducts = displayProducts.join("");
+                        console.log(displayProducts);
+
+                        document.getElementById("product-filter").innerHTML = displayProducts;
+                    }
+                    else {
+                        alert(rs.ErrDesc);
+                    }
+                },
+                error: function (response) {
+                    alert("Lấy DSSP thất bại");
+                }
+            }
+        );
+    })
+</script>
