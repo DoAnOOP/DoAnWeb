@@ -10,10 +10,9 @@
 <div class="page-info-section page-info">
     <div class="container">
         <div class="site-breadcrumb">
-            <a href="~/home/index">Home</a> /
-            <a href="">Sales</a> /
-            <a href="">Bags</a> /
-            <span>Shoulder bag</span>
+            <span>Home</span> /
+            <span id="category-title"></span> /
+            <span id="product-title"></span>
         </div>
         <img src="~/Content/img/page-info-art.png" alt="" class="page-info-art">
     </div>
@@ -132,6 +131,8 @@
                     document.getElementById("p-descpls").innerHTML = data.Description;
                     document.getElementById("p-name").innerHTML = data.NameProduct;
                     document.getElementById("p-price").innerHTML = data.Price;
+                    document.getElementById("product-title").innerHTML = data.NameProduct;
+                    document.getElementById("category-title").innerHTML = data.CategoryName;
                     document.querySelector(".cart-btn").setAttribute("data-id", data.ID)
 
                 },
