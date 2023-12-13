@@ -355,6 +355,68 @@ namespace test1.Controllers
             }
             return "Lỗi";
         }
+        public string Search_acc()
+        {
+            APIResult_ett<List<Account>> rs = new APIResult_ett<List<Account>>();
+            try
+            {
+                string search_val = Request["search_val"];
+                //string search_type = Request["search_type"];
+
+                if (!string.IsNullOrEmpty(search_val))
+                {
+                    //truy vấn db để lấy toàn bộ dữ liệu về ds sinh viên
+                    IQueryable<Account> qr = null;
+                    qr = db.Accounts.Where(o => o.UserName.Contains(search_val));
+                    if (qr.Any())
+                    {
+                        //có dữ liệu => chính là dssv
+                        rs.ErrCode = EnumErrCode.Success;
+                        rs.ErrDesc = "Tìm kiếm sinh viên thành công";
+                        rs.Data = qr.ToList();
+                    }
+                    else
+                    {
+                        //không có dữ liệu thỏa mãn
+                        rs.ErrCode = EnumErrCode.Empty;
+                        rs.ErrDesc = "Không tìm thấy sinh viên thỏa mãn điều kiện tìm kiếm";
+                        rs.Data = null;
+                    }
+                }
+                else
+                {
+                    //get all
+                    var qr = db.Accounts;
+                    if (qr.Any())
+                    {
+                        //có dữ liệu => chính là dssv
+                        rs.ErrCode = EnumErrCode.Success;
+                        rs.ErrDesc = "Lấy DSSV thành công";
+                        rs.Data = qr.ToList();
+                    }
+                    else
+                    {
+                        //không có dữ liệu thỏa mãn
+                        rs.ErrCode = EnumErrCode.Empty;
+                        rs.ErrDesc = "DSSV rỗng";
+                        rs.Data = null;
+                    }
+
+                    //rs.ErrCode = EnumErrCode.InputEmpty;
+                    //rs.ErrDesc = "Vui lòng nhập đầy đủ giá trị và tiêu chí cần tìm kiếm";
+                    //rs.Data = null;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                rs.ErrCode = EnumErrCode.Error;
+                rs.ErrDesc = "Có lỗi xảy ra trong quá trình lấy về DSSV. Chi tiết lỗi: " + ex.Message;
+                rs.Data = null;
+            }
+
+            return JsonConvert.SerializeObject(rs);
+        }
 
         public string Del_Cate()
         {

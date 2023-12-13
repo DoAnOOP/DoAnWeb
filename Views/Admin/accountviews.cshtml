@@ -32,14 +32,14 @@
                         <div class="col-sm-2 col-md-3 right">
                         </div>
                         <div class="col-sm-4 col-md-5 right">
-                            <input name="txt_search_val" id="txt_search_val" class="form-control" type="text" placeholder="Nhập giá trị tìm kiếm" />
+                            <input name="txt_search_val" id="txt_search_val" class="form-control" type="text" placeholder="Nhập tài khoản cần tìm" />
                         </div>
-                        <div class="col-sm-4 col-md-3">
+                        @*<div class="col-sm-4 col-md-3">
                             <select id="slc_search_type" class="form-control">
                                 <option value="">Chọn tiêu chí tìm kiếm</option>
                                 <option value="AccountName">Account's Name</option>
                             </select>
-                        </div>
+                        </div>*@
                         <div class="col-sm-2 col-md-1 right"><button id="btn_search_action" class="btn btn-primary"><i class="fa fa-search"></i></button></div>
                     </div>
                     <table class="table table-bordered table-border-grey">
@@ -100,7 +100,7 @@
 
         $("#btn_search_action").click(function () {
             //alert($("#txt_search_val").val());
-            var search_type = $("#slc_search_type").val();
+            //var search_type = $("#slc_search_type").val();
             //if (!search_type) {
             //    alert("Vui lòng chọn tiêu chí tìm kiếm");
             //    return false;
@@ -108,14 +108,14 @@
 
             var formData = new FormData();
             formData.append("search_val", $("#txt_search_val").val());
-            formData.append("search_type", search_type);
+            //formData.append("search_type", search_type);
 
             $.ajax(
                 {
                     type: "POST",
                     data: formData,
                     contentType: "application/json; charset=utf-8",
-                    url: window.location.origin + '/QLSV/Search_acc',
+                    url: window.location.origin + '/Admin/Search_acc',
                     processData: false,
                     contentType: false,
                     cache: false,
