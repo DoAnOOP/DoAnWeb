@@ -90,18 +90,18 @@ namespace test1.Controllers
             }
             return RedirectToAction("DangNhap", "TaiKhoan");
         }
-        public ActionResult removecategory()
-        {
-            if (System.Web.HttpContext.Current.Session["admin"] != null)
-            {
-                if ((bool)Session["admin"])
-                {
-                    //trường hợp đã login rồi
-                    return View();
-                }
-            }
-            return RedirectToAction("DangNhap", "TaiKhoan");
-        }
+        //public ActionResult removecategory()
+        //{
+        //    if (System.Web.HttpContext.Current.Session["admin"] != null)
+        //    {
+        //        if ((bool)Session["admin"])
+        //        {
+        //            //trường hợp đã login rồi
+        //            return View();
+        //        }
+        //    }
+        //    return RedirectToAction("DangNhap", "TaiKhoan");
+        //}
         public ActionResult editcategories()
         {
             if (System.Web.HttpContext.Current.Session["admin"] != null)
@@ -236,7 +236,7 @@ namespace test1.Controllers
                     {
                         Account acc = qrs.FirstOrDefault();
                         acc.IsAdmin = Roles;
-                        acc.UserName = Username;
+                        //acc.UserName = Username;
                         db.SubmitChanges();
                         return "Cập nhật thông tin tài khoản thành công";
                     }
@@ -248,83 +248,6 @@ namespace test1.Controllers
                 return "Lỗi";
             }
         }
-        //public string Search_acc()
-        //{
-        //    APIResult_ett<List<Account>> rs = new APIResult_ett<List<Account>>();
-        //    try
-        //    {
-        //        string search_val = Request["search_val"];
-        //        string search_type = Request["search_type"];
-
-        //        if (!string.IsNullOrEmpty(search_val) && !string.IsNullOrEmpty(search_type))
-        //        {
-        //            //truy vấn db để lấy toàn bộ dữ liệu về ds sinh viên
-        //            IQueryable<Account> qr = null;
-
-        //            switch (search_type)
-        //            {
-        //                case "ID":
-        //                    qr = db.Accounts.Where(o => o.ID == int.Parse(search_val));
-        //                    break;
-        //                case "AccountName":
-        //                    qr = db.Accounts.Where(o => o.UserName.Contains(search_val));
-        //                    break;
-        //                default:
-        //                    break;
-        //            }
-
-        //            if (qr.Any())
-        //            {
-        //                //có dữ liệu => chính là dssv
-        //                rs.ErrCode = EnumErrCode.Success;
-        //                rs.ErrDesc = "Tìm kiếm sinh viên thành công";
-        //                rs.Data = qr.ToList();
-        //            }
-        //            else
-        //            {
-        //                //không có dữ liệu thỏa mãn
-        //                rs.ErrCode = EnumErrCode.Empty;
-        //                rs.ErrDesc = "Không tìm thấy sinh viên thỏa mãn điều kiện tìm kiếm";
-        //                rs.Data = null;
-        //            }
-        //        }
-        //        else
-        //        {
-        //            //get all
-        //            var qr = db.Accounts;
-        //            if (qr.Any())
-        //            {
-        //                //có dữ liệu => chính là dssv
-        //                rs.ErrCode = EnumErrCode.Success;
-        //                rs.ErrDesc = "Lấy DSSV thành công";
-        //                rs.Data = qr.ToList();
-        //            }
-        //            else
-        //            {
-        //                //không có dữ liệu thỏa mãn
-        //                rs.ErrCode = EnumErrCode.Empty;
-        //                rs.ErrDesc = "DSSV rỗng";
-        //                rs.Data = null;
-        //            }
-
-        //            //rs.ErrCode = EnumErrCode.InputEmpty;
-        //            //rs.ErrDesc = "Vui lòng nhập đầy đủ giá trị và tiêu chí cần tìm kiếm";
-        //            //rs.Data = null;
-        //        }
-
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        rs.ErrCode = EnumErrCode.Error;
-        //        rs.ErrDesc = "Có lỗi xảy ra trong quá trình lấy về DSSV. Chi tiết lỗi: " + ex.Message;
-        //        rs.Data = null;
-        //    }
-
-        //    return JsonConvert.SerializeObject(rs);
-        //}
-
-
-        //CATEGORY
         public string get_Category()
         {
             APIResult_ett<List<Category>> rs = new APIResult_ett<List<Category>>();
@@ -374,9 +297,7 @@ namespace test1.Controllers
                     {
                         Category cate = new Category();
                         cate.NameCategory = catename;
-                        cate.ShowOnHomePage = true;
                         cate.CreatedOnUtc = NOW;
-                        cate.UpdatedOnUtc = NOW;
 
                         db.Categories.InsertOnSubmit(cate);
                         db.SubmitChanges();
@@ -416,8 +337,6 @@ namespace test1.Controllers
                         {
                             Category cate = qrs.SingleOrDefault();
                             cate.NameCategory = catename;
-                            cate.ShowOnHomePage = true;
-                            cate.CreatedOnUtc = NOW;
                             cate.UpdatedOnUtc = NOW;
 
                             db.SubmitChanges();
@@ -616,6 +535,7 @@ namespace test1.Controllers
                     prd.Price = double.Parse(price);
                     prd.Description = desc;
                     prd.CategoryName = category;
+                    prd.CreatedOnUtc = DateTime.Now;
 
                     db.Products.InsertOnSubmit(prd);
                     db.SubmitChanges();
@@ -656,6 +576,7 @@ namespace test1.Controllers
                         sp.Price = double.Parse(price);
                         sp.Description = desc;
                         sp.CategoryName = category;
+                        sp.UpdatedOnUtc = DateTime.Now;
 
                         db.SubmitChanges();
 

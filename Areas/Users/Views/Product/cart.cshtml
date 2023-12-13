@@ -3,6 +3,10 @@
     ViewBag.Title = "cart";
     Layout = "~/Areas/Users/Views/Shared/Layout.cshtml";
 }
+
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+
+
 <!-- Page Info -->
 <div class="page-info-section page-info">
     <div class="container">
@@ -20,7 +24,7 @@
 <div class="page-area cart-page spad">
     <div class="container">
         <div class="cart-table">
-            <table>
+            <table id="cart-body">
                 <thead>
                     <tr>
                         <th class="product-th">Product</th>
@@ -30,32 +34,15 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td class="product-col">
-                            <img src="~/Content/img/product/cart.jpg" alt="">
-                            <div class="pc-title">
-                                <h4>Black Shoulder Bag</h4>
-                                <a href="#">Edit Product</a>
-                            </div>
-                        </td>
-                        <td class="price-col">$59.90</td>
-                        <td class="quy-col">
-                            <div class="quy-input">
-                                <span>Qty</span>
-                                <input type="number" value="01">
-                            </div>
-                        </td>
-                        <td class="total-col">$59.90</td>
-                    </tr>
                 </tbody>
             </table>
         </div>
         <div class="row cart-buttons">
             <div class="col-lg-5 col-md-5">
-                <div class="site-btn btn-continue">Continue shooping</div>
+                <a href="categorie" class="site-btn btn-continue">Continue shooping</a>
             </div>
             <div class="col-lg-7 col-md-7 text-lg-right text-left">
-                <div class="site-btn btn-clear">Clear cart</div>
+                <div id="clearCartBtn" class="site-btn btn-clear">Clear cart</div>
                 <div class="site-btn btn-line btn-update">Update Cart</div>
             </div>
         </div>
@@ -94,9 +81,9 @@
                         <h4>Cart total</h4>
                         <p>Final Info</p>
                         <ul class="cart-total-card">
-                            <li>Subtotal<span>$59.90</span></li>
+                            <li>Subtotal<span>$<span class="checkout-price">59.90</span></span></li>
                             <li>Shipping<span>Free</span></li>
-                            <li class="total">Total<span>$59.90</span></li>
+                            <li class="total">Total<span>$<span class="checkout-price">59.90</span></span></li>
                         </ul>
                         <a class="site-btn btn-full" href="checkout.html">Proceed to checkout</a>
                     </div>
@@ -105,4 +92,201 @@
         </div>
     </div>
 </div>
+<script>
+
+    function calTotalPrice() {
+        const cart = JSON.parse(localStorage.getItem('cart'));
+
+        if (cart && cart.length > 0) {
+            let total = 0;
+
+            cart.forEach((item) => {
+                total += item.Price * item.quantity
+            })
+
+            document.querySelectorAll(".checkout-price").forEach((item) => item.innerHTML = total)
+        } else {
+            document.querySelectorAll(".checkout-price").forEach((item) => item.innerHTML = 0)
+        }
+    }
+
+    function removeCartItem() {
+        const removeBtn = document.querySelectorAll(".remove-cart-item")
+        removeBtn.forEach((item) => {
+            item.addEventListener("click", (e) => {
+                console.log(e.target.getAttribute("data-id"))
+
+                let cart = [];
+                const storage = localStorage.getItem('cart');
+                if (storage) {
+                    cart = JSON.parse(storage);
+                }
+                const itemDel = cart.find((cartItem) => {
+                    return cartItem.id == e.target.getAttribute("data-id")
+                });
+
+                cart.splice(cart.indexOf(itemDel), 1)
+
+                localStorage.setItem('cart', JSON.stringify(cart));
+                let newStorage = localStorage.getItem('cart');
+                if (newStorage) {
+                    cart = JSON.parse(newStorage);
+                }
+                showCart(cart);
+
+                removeCartItem()
+                calTotalPrice()
+            })
+        })
+    }
+
+    function setQuantityInput() {
+        const quantityInputs = document.querySelectorAll(".quantity-input")
+
+        quantityInputs.forEach((item) => {
+            item.addEventListener("change", (e) => {
+                const totalPrice = document.getElementById(e.target.id + "total")
+                totalPrice.innerHTML = totalPrice.getAttribute("data-price") * e.target.value
+
+                const storage = localStorage.getItem('cart');
+                if (storage) {
+                    cart = JSON.parse(storage);
+                }
+                const item = cart.find((cartItem) => {
+                    return cartItem.id == e.target.getAttribute("data-id")
+                });
+                if (item) {
+                    item.quantity = e.target.value;
+                }
+                localStorage.setItem('cart', JSON.stringify(cart));
+                calTotalPrice()
+            })
+        })
+    }
+
+
+    function showCart(shoppingCart) {
+        const cartBody = document.getElementById('cart-body');
+        let displayCart = shoppingCart.map(item => {
+            return `<tbody>
+                                       <tr>
+                                         <td class="product-col">
+                                           <img src="${item.URL}" alt="">
+                                           <div class="pc-title">
+                                             <h4>${item.NameProduct}</h4>
+                                             <a href="#">.</a>
+                                           </div>
+                                         </td>
+                                         <td class="price-col">Price: $${item.Price}</td>
+                                         <td class="quy-col">
+                                           <div class="quy-input">
+                                             <span>Qty</span>
+                                             <input type="number" min="1" class="quantity-input" data-id="${item.id}" id="${item.id + "-price"}" value=${item.quantity}>
+                                           </div>
+                                         </td>
+                                         <td class="total-col">Total: $<span class="total-price" id="${item.id + "-pricetotal"}" data-price="${item.Price}">${item.quantity * item.Price}</span></td>
+                                         <td class="price-col remove-cart-item" data-id="${item.id}">Remove</td>
+                                       </tr>
+                                   </tbody>
+                                     `;
+        });
+        console.log(displayCart)
+        displayCart = displayCart.join("")
+        cartBody.innerHTML = displayCart
+
+        setQuantityInput()
+        calTotalPrice()
+    };
+
+    function Cart() {
+
+        document.getElementById("clearCartBtn").addEventListener("click", () => {
+            localStorage.clear()
+            let storage = localStorage.getItem('cart');
+            if (storage == null) {
+                const cartBody = document.getElementById('cart-body');
+                cartBody.innerHTML = "";
+            }
+            calTotalPrice()
+
+        })
+
+        let cart = [];
+        let storage = localStorage.getItem('cart');
+        if (storage) {
+            cart = JSON.parse(storage);
+        }
+
+        showCart(cart);
+
+
+        const btn = document.querySelectorAll(".cart-btn")
+        console.log(btn)
+        btn.forEach((item) => {
+            console.log(item)
+            item.addEventListener("click", (e) => {
+                const productID = item.id;
+                var formData = new FormData();
+                formData.append("productID", productID);
+
+                $.ajax(
+                    {
+                        type: "POST",
+                        data: formData,
+                        contentType: "application/json; charset=utf-8",
+                        url: window.location.origin + '/Admin/get_SP_Info',
+                        processData: false,
+                        contentType: false,
+                        cache: false,
+                        success: function (response) {
+                            var data = JSON.parse(response);
+                            console.log(data)
+
+
+                            let cart = [];
+                            const addToCart = ({ ID, URL, NameProduct, Price }) => {
+                                let storage = localStorage.getItem('cart');
+
+
+                                if (storage) {
+                                    cart = JSON.parse(storage);
+                                }
+
+
+                                let item = cart.find((cartItem) => {
+                                    return cartItem.id == ID
+                                });
+
+                                if (item) {
+                                    item.quantity = parseInt(item.quantity) + 1;
+                                } else {
+                                    cart.push({ id: ID, URL: URL, NameProduct: NameProduct, Price: Price, quantity: 1 });
+                                }
+                                localStorage.setItem('cart', JSON.stringify(cart));
+                                showCart(cart);
+                                removeCartItem()
+
+                            };
+                            addToCart(data);
+
+                            localStorage.setItem('cartData', JSON.stringify(cart));
+                            //window.location.href = '/Users/Product/cart';
+
+                        },
+                    }
+                );
+            })
+        })
+
+        setQuantityInput()
+        removeCartItem()
+    }
+
+
+
+
+    Cart()
+</script>
+
+
 <!-- Page end -->

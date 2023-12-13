@@ -6,6 +6,8 @@
     <link href="~/Content/assets/css/uploader.css" rel="stylesheet" />
 }
 
+
+
 <div class="row">
     <div class="col-12">
         <div class="card card-chart">
@@ -23,7 +25,7 @@
                         <div class="text-input">
                             <label for="a-name" class="text-label">Account's name:</label>
                             <input type="text" class="text-field" placeholder="Denim pant..." name="a-name" id='a-name'
-                                   required />
+                                   required readonly/>
                         </div>
                         <div class="checkroles">
                             <!-- <input type="checkbox" class="account-roles" name="a-roles" id ="a-roles">
@@ -47,7 +49,7 @@
 
 <script src="~/Content/assets/js/uploader.js"></script>
 
-<script>
+@*<script>
     document.getElementById("file-upload").addEventListener("change", (e) => {
         e.preventDefault();
         handleSubmit();
@@ -74,7 +76,7 @@
                 document.getElementById("a-image").value = res.data.url
             })
     }
-</script>
+</script>*@
 
 <script>
 
@@ -91,20 +93,14 @@
                 type: "POST",
                 data: formData,
                 contentType: "application/json; charset=utf-8",
-                url: window.location.origin + '/Admin/get_All_cate',
+                url: window.location.origin + '/Admin/get_All_acc',
                 processData: false,
                 contentType: false,
                 cache: false,
                 success: function (response) {
                     var data = JSON.parse(response);
-                    $("#a-image").val(data.URL);
-                    $("#a-name").val(data.Nameaccount);
-                    $("#a-price").val(data.Price);
-                    $("#a-desc").val(data.Description);
-                    document.getElementById('start').classList.add("hidden");
-                    document.getElementById('notimage').classList.add("hidden");
-                    document.getElementById('file-image').classList.remove("hidden");
-                    document.getElementById("file-image").src = data.URL;
+                    console.log(data)
+                    document.getElementById("a-name").value = accountID
 
                 },
                 error: function (response) {
