@@ -252,9 +252,9 @@ ol {
 }
 
 .header-section.header-normal {
-	position: relative;
+	position: fixed;
 	overflow: visible;
-	padding: 32px 34px 58px;
+	padding: 28px 34px 28px;
 	background: #f0f9ff;
 	background: -webkit-gradient(linear, left top, right top, from(#f0f9ff), color-stop(0%, #aa7ad0), to(#d07acd));
 	background: -o-linear-gradient(left, #f0f9ff 0%, #aa7ad0 0%, #d07acd 100%);

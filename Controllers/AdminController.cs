@@ -492,7 +492,7 @@ namespace test1.Controllers
             APIResult_ett<List<Category>> rs = new APIResult_ett<List<Category>>();
             try
             {
-                var qr = db.Categories.Where(o => o.isDelete == false || o.isDelete == null);
+                var qr = db.Categories.Where(o => o.isDelete == false || o.isDelete == null );
                 if (qr.Any())
                 {
                     rs.ErrCode = EnumErrCode.Success;
@@ -514,6 +514,31 @@ namespace test1.Controllers
             }
 
             return JsonConvert.SerializeObject(rs);
+        }
+      
+        public string get_Cate_Info()
+        {
+            string CateID = Request["catergoryID"];
+            //int productIntID = int.Parse(productID);
+            try
+            {
+                var qr = db.Categories.Where(o => o.ID == int.Parse(CateID));
+                if (qr.Any())
+                {
+                    var sp_obj = qr.SingleOrDefault();
+
+                    return JsonConvert.SerializeObject(sp_obj);
+                }
+                else
+                {
+                    return "Không tìm thấy SP có ID=" + CateID;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                return "Lấy thông tin sản phẩm thất bại. Chi tiết lỗi: " + ex.Message;
+            }
         }
         //PRODUCTS
         public string Add_prd()
