@@ -312,7 +312,7 @@ namespace test1.Controllers
             }
             else
             {
-                return "Mày chơi tao không được đâu";
+                return "Xin Nhập Tên Mục Sản Phẩm Muốn Thêm";
             }
         }
         public string Edit_cate()
@@ -351,7 +351,7 @@ namespace test1.Controllers
             }
             else
             {
-                return "Mày chơi tao không được đâu";
+                return "Bạn đã để trống trường dữ liệu";
             }
             return "Lỗi";
         }
@@ -372,14 +372,14 @@ namespace test1.Controllers
                     {
                         //có dữ liệu => chính là dssv
                         rs.ErrCode = EnumErrCode.Success;
-                        rs.ErrDesc = "Tìm kiếm sinh viên thành công";
+                        rs.ErrDesc = "Tìm kiếm tài khoản thành công";
                         rs.Data = qr.ToList();
                     }
                     else
                     {
                         //không có dữ liệu thỏa mãn
                         rs.ErrCode = EnumErrCode.Empty;
-                        rs.ErrDesc = "Không tìm thấy sinh viên thỏa mãn điều kiện tìm kiếm";
+                        rs.ErrDesc = "Không tìm thấy tài khoản thỏa mãn điều kiện tìm kiếm";
                         rs.Data = null;
                     }
                 }
@@ -391,14 +391,14 @@ namespace test1.Controllers
                     {
                         //có dữ liệu => chính là dssv
                         rs.ErrCode = EnumErrCode.Success;
-                        rs.ErrDesc = "Lấy DSSV thành công";
+                        rs.ErrDesc = "Lấy tài khoản thành công";
                         rs.Data = qr.ToList();
                     }
                     else
                     {
                         //không có dữ liệu thỏa mãn
                         rs.ErrCode = EnumErrCode.Empty;
-                        rs.ErrDesc = "DSSV rỗng";
+                        rs.ErrDesc = "Danh sách tài khoản rỗng";
                         rs.Data = null;
                     }
 
@@ -411,7 +411,7 @@ namespace test1.Controllers
             catch (Exception ex)
             {
                 rs.ErrCode = EnumErrCode.Error;
-                rs.ErrDesc = "Có lỗi xảy ra trong quá trình lấy về DSSV. Chi tiết lỗi: " + ex.Message;
+                rs.ErrDesc = "Có lỗi xảy ra trong quá trình lấy về DSTK. Chi tiết lỗi: " + ex.Message;
                 rs.Data = null;
             }
 
@@ -440,13 +440,13 @@ namespace test1.Controllers
                         db.SubmitChanges();
 
                         rs.ErrCode = EnumErrCode.Success;
-                        rs.ErrDesc = "Xóa SP có MSP " + cateId + " thành công";
+                        rs.ErrDesc = "Xóa danh mục có mã " + cateId + " thành công";
                         rs.Data = del_obj.NameCategory;
                     }
                     else
                     {
                         rs.ErrCode = EnumErrCode.NotExistent;
-                        rs.ErrDesc = "Xóa SP có MSP " + cateId + " thất bại do không tìm thấy";
+                        rs.ErrDesc = "Xóa danh mục có mã " + cateId + " thất bại do không tìm thấy";
                         rs.Data = null;
 
                     }
@@ -454,14 +454,14 @@ namespace test1.Controllers
                 else
                 {
                     rs.ErrCode = EnumErrCode.Empty;
-                    rs.ErrDesc = "Vui lòng nhập MSSV cần xóa";
+                    rs.ErrDesc = "Vui lòng nhập mã cần xóa";
                     rs.Data = null;
                 }
             }
             catch (Exception ex)
             {
                 rs.ErrCode = EnumErrCode.Error;
-                rs.ErrDesc = "Xóa sinh viên thất bại. Chi tiết lỗi: " + ex.Message;
+                rs.ErrDesc = "Xóa danh mục thất bại. Chi tiết lỗi: " + ex.Message;
                 rs.Data = null;
             }
 
@@ -496,14 +496,14 @@ namespace test1.Controllers
                     {
                         //có dữ liệu => chính là dssv
                         rs.ErrCode = EnumErrCode.Success;
-                        rs.ErrDesc = "Tìm kiếm sinh viên thành công";
+                        rs.ErrDesc = "Tìm kiếm danh mục thành công";
                         rs.Data = qr.ToList();
                     }
                     else
                     {
                         //không có dữ liệu thỏa mãn
                         rs.ErrCode = EnumErrCode.Empty;
-                        rs.ErrDesc = "Không tìm thấy sinh viên thỏa mãn điều kiện tìm kiếm";
+                        rs.ErrDesc = "Không tìm thấy danh mục thỏa mãn điều kiện tìm kiếm";
                         rs.Data = null;
                     }
                 }
@@ -515,14 +515,14 @@ namespace test1.Controllers
                     {
                         //có dữ liệu => chính là dssv
                         rs.ErrCode = EnumErrCode.Success;
-                        rs.ErrDesc = "Lấy DSSV thành công";
+                        rs.ErrDesc = "Lấy danh mục thành công";
                         rs.Data = qr.ToList();
                     }
                     else
                     {
                         //không có dữ liệu thỏa mãn
                         rs.ErrCode = EnumErrCode.Empty;
-                        rs.ErrDesc = "DSSV rỗng";
+                        rs.ErrDesc = "Danh sách danh mục rỗng";
                         rs.Data = null;
                     }
 
@@ -535,7 +535,7 @@ namespace test1.Controllers
             catch (Exception ex)
             {
                 rs.ErrCode = EnumErrCode.Error;
-                rs.ErrDesc = "Có lỗi xảy ra trong quá trình lấy về DSSV. Chi tiết lỗi: " + ex.Message;
+                rs.ErrDesc = "Có lỗi xảy ra trong quá trình lấy về Danh sách danh mục. Chi tiết lỗi: " + ex.Message;
                 rs.Data = null;
             }
 
@@ -593,7 +593,7 @@ namespace test1.Controllers
                 }
                 else
                 {
-                    return "Không tìm thấy SP có ID=" + CateID;
+                    return "Không tìm thấy Cate có ID=" + CateID;
                 }
 
             }
@@ -636,7 +636,7 @@ namespace test1.Controllers
             }
             else
             {
-                return "Mày chơi tao không được đâu";
+                return "Bạn Chưa Nhập Đủ Dữ Liệu";
             }
         }
         public string Edit_prd()
@@ -682,7 +682,7 @@ namespace test1.Controllers
             }
             else
             {
-                return "Mày chơi tao không được đâu";
+                return "Bạn đã để trống một số dữ liệu";
             }
         }
         public string Del_prd()
@@ -721,14 +721,14 @@ namespace test1.Controllers
                 else
                 {
                     rs.ErrCode = EnumErrCode.Empty;
-                    rs.ErrDesc = "Vui lòng nhập MSSV cần xóa";
+                    rs.ErrDesc = "Vui lòng nhập MSP cần xóa";
                     rs.Data = null;
                 }
             }
             catch (Exception ex)
             {
                 rs.ErrCode = EnumErrCode.Error;
-                rs.ErrDesc = "Xóa sinh viên thất bại. Chi tiết lỗi: " + ex.Message;
+                rs.ErrDesc = "Xóa SP thất bại. Chi tiết lỗi: " + ex.Message;
                 rs.Data = null;
             }
 

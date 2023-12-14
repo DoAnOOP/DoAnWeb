@@ -43,7 +43,7 @@ namespace test1.Controllers
                             rs.ErrDesc = "Đăng nhập hệ thống admin thành công";
                             rs.Data = db.Accounts.Where(o => o.UserName == tk && o.Password == mk).ToList();
                             // Chuyển hướng đến trang admin
-                            Redirect("~/Admin/addproducts");
+                            
                         }
                         else // Nếu isAdmin là 0 hoac null
                         {
@@ -53,14 +53,14 @@ namespace test1.Controllers
                             rs.ErrDesc = "Đăng nhập hệ thống user thành công";
                             rs.Data = db.Accounts.Where(o => o.UserName == tk && o.Password == mk).ToList();
                             // Chuyển hướng đến trang người dùng
-                            Redirect("~/Users/user/index");
+                            
                         }
                         
                     }
                     else
                     {
                         rs.ErrCode = EnumErrCode.NotExistent;
-                        rs.ErrDesc = "Đăng nhập thất bại";
+                        rs.ErrDesc = "Tài Khoản Hoặc Mật Khẩu Không Đúng Vui Lòng Nhập Lại";
                         rs.Data = null;
 
                     }
@@ -110,7 +110,7 @@ namespace test1.Controllers
             }
             else
             {
-                return "Mày chơi tao không được đâu";
+                return "Vui Lòng Nhập Vào Dữ Liệu Cần Thiết";
             }
         }
     }
