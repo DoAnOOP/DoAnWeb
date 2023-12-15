@@ -1,8 +1,85 @@
-﻿@{
+﻿
+@{
     ViewBag.Title = "productviews";
     Layout = "~/Views/Shared/_Layout.cshtml";
     <script src="~/Content/assets/js/core/jquery.min.js"></script>
 }
+
+<style>
+
+    .search-container {
+        display: inline-block;
+        margin-bottom: 1.5em;
+        margin-top: -1em;
+    }
+
+    .search {
+        display: table;
+    }
+
+        .search label {
+            margin: 0;
+            margin-right: 0.5em;
+        }
+
+        .search input {
+            background: none;
+            border: none;
+            outline: none;
+            width: 28px;
+            min-width: 0;
+            padding: 0;
+            z-index: 1;
+            position: relative;
+            line-height: 18px;
+            margin: 5px 0;
+            font-size: 14px;
+            -webkit-appearance: none;
+            transition: all 0.6s ease;
+            cursor: pointer;
+        }
+
+            .search input + div {
+                position: relative;
+                height: 28px;
+                width: 100%;
+                margin: -28px 0 0 0;
+            }
+
+                .search input + div svg {
+                    display: block;
+                    position: absolute;
+                    height: 28px;
+                    width: 160px;
+                    right: 0;
+                    top: 0;
+                    fill: none;
+                    stroke: #d07acd;
+                    stroke-width: 1.5px;
+                    stroke-dashoffset: 271.908;
+                    stroke-dasharray: 59 212.908;
+                    transition: all 0.6s ease;
+                }
+
+            .search input:not(:placeholder-shown), .search input:focus {
+                width: 160px;
+                padding: 0 4px;
+                cursor: text;
+            }
+
+                .search input:not(:placeholder-shown) + div svg, .search input:focus + div svg {
+                    stroke-dasharray: 150 212.908;
+                    stroke-dashoffset: 300;
+                }
+
+    ::selection {
+        background: rgba(255, 255, 255, 0.2);
+    }
+
+    ::-moz-selection {
+        background: rgba(255, 255, 255, 0.2);
+    }
+</style>
 
 <div class="row">
     <div class="col-12">
@@ -12,112 +89,115 @@
                     <div class="col-sm-6 text-left">
                         <h5 class="card-category">Dashboard</h5>
                         <h2 class="card-title">Products</h2>
-                        <div>
-
-
-                        </div>
                     </div>
                 </div>
             </div>
             <div class="card-body">
-                <div class="row" id="product-filter">
+                <div class="search-container">
+                    <div class="search">
+                        <label for="search-bar">Search: </label>
+                        <input id="search-bar" name="search-bar" type="text" placeholder=" ">
+                        <div>
+                            <svg>
+                                <use xlink:href="#path">
+                            </svg>
+                        </div>
+                    </div>
 
+                    <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+                        <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 28" id="path">
+                            <path d="M32.9418651,-20.6880772 C37.9418651,-20.6880772 40.9418651,-16.6880772 40.9418651,-12.6880772 C40.9418651,-8.68807717 37.9418651,-4.68807717 32.9418651,-4.68807717 C27.9418651,-4.68807717 24.9418651,-8.68807717 24.9418651,-12.6880772 C24.9418651,-16.6880772 27.9418651,-20.6880772 32.9418651,-20.6880772 L32.9418651,-29.870624 C32.9418651,-30.3676803 33.3448089,-30.770624 33.8418651,-30.770624 C34.08056,-30.770624 34.3094785,-30.6758029 34.4782612,-30.5070201 L141.371843,76.386562" transform="translate(83.156854, 22.171573) rotate(-225.000000) translate(-83.156854, -22.171573)"></path>
+                        </symbol>
+                    </svg>
+                </div>
+                <div class="categorie-filter-warp">
+                    <div class="row" id="product-filter">
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
-<script>
-    function Delete_obj(id) {
-        if (confirm("Bạn có thực sự muốn xóa sản phẩm này không?")) {
-            //xử lý xóa
-            /*alert("Đồng ý xóa");*/
+    <script>
+        function displayProducts(products) {
+            let displayProducts = products.map(function (item) {
+                return `<div class="mix col-lg-3 col-md-6 best">
+        <div class="product-item">
+            <figure>
+                <img src="${item.URL}" alt="">
+                <div class="pi-meta">
+                                            <a href="../Users/product/Product2?p-id=${item.ID}" class="pi-m-left">
+                                                <img src="/Content/assets/img/icons/eye.png" alt="">
+                                                <p>quick view</p>
+                                            </a>
+                </div>
+            </figure>
+            <div class="product-info">
+                <h6>${item.NameProduct}</h6>
+                <p>${"$" + item.Price}</p>
+                <div>
+                    <a href="#" class="site-btn btn-line">REMOVE</a>
+                    <a href="./editproduct?p-id=${item.ID}" class="site-btn btn-line">EDIT</a>
+                </div>
+            </div>
+        </div>
+</div>`;
+            });
+            displayProducts = displayProducts.join("");
+            displayProducts += `<div class="mix col-lg-3 col-md-6 best">
+               <div>
+                   <a class="add-product-btn" href="addproducts">
+                       <i class="tim-icons icon-simple-add"></i>
+                   </a>
+               </div>
+           </div>`;
 
-            //trường hợp không rỗng
-            var formData = new FormData();
-            formData.append("prdID", id);
+            document.getElementById("product-filter").innerHTML = displayProducts;
+
+        }
+
+        $(document).ready(function () {
+            let currentProducts = []
 
             $.ajax(
                 {
                     type: "POST",
-                    data: formData,
                     contentType: "application/json; charset=utf-8",
-                    url: window.location.origin + '/admin/Del_prd',
+                    url: window.location.origin + '/Admin/get_All',
                     processData: false,
                     contentType: false,
                     cache: false,
                     success: function (response) {
                         var rs = JSON.parse(response);
-                        alert(rs.ErrDesc);
-                        //refresh lại trang web để thấy thay đổi;
-                        window.location.href = "/Admin/productviews";
+
+                        if (rs.ErrCode == 1) {
+                            console.log(rs.Data)
+                            const products = rs.Data
+                            displayProducts(products)
+                            currentProducts = products
+                        }
+                        else {
+                            alert(rs.ErrDesc);
+                        }
                     },
                     error: function (response) {
-                        alert("Xóa SP thất bại");
+                        alert("Lấy DSSP thất bại");
                     }
                 }
             );
-        }
-    };
-    $(document).ready(function () {
-        $.ajax(
-            {
-                type: "POST",
-                contentType: "application/json; charset=utf-8",
-                url: window.location.origin + '/Admin/get_All',
-                processData: false,
-                contentType: false,
-                cache: false,
-                success: function (response) {
-                    var rs = JSON.parse(response);
 
-                    if (rs.ErrCode == 1) {
-                        console.log(rs.Data)
-                        const products = rs.Data
-                        let displayProducts = products.map(function (item) {
-                            return `<div class="mix col-lg-3 col-md-6 best">
-                 <div class="product-item">
-                     <figure>
-                         <img src="${item.URL}" alt="">
-                         <div class="pi-meta">
-                             <a href="../Users/product/Product2?p-id=${item.ID}" class="pi-m-left">
-                                                         <img src="/Content/assets/img/icons/eye.png" alt="">
-                                                         <p>quick view</p>
-                                                     </a>
-                         </div>
-                     </figure>
-                     <div class="product-info">
-                         <h6>${item.NameProduct}</h6>
-                         <p>${"$" + item.Price}</p>
-                         <div>
-                             <a class="site-btn btn-line" onclick="Delete_obj(${item.ID})">REMOVE</a>
-                             <a href="./editproducts?p-id=${item.ID}" class="site-btn btn-line">EDIT</a>
-                         </div>
-                     </div>
-                 </div>
-             </div>`;
-                        });
-                        displayProducts = displayProducts.join("");
-                        displayProducts += `<div class="mix col-lg-3 col-md-6 best">
-                        <div>
-                            <a class="add-product-btn" href="addproducts">
-                                <i class="tim-icons icon-simple-add"></i>
-                            </a>
-                        </div>
-                    </div>`
-                        console.log(displayProducts);
+            document.getElementById("search-bar").addEventListener("input", (e) => {
+                let input = e.target.value;
 
-                        document.getElementById("product-filter").innerHTML = displayProducts;
+                input = input.toLowerCase();
+                const filteredProducts = currentProducts.filter((item) => {
+                    if (item.NameProduct.toLowerCase().includes(input) || item.Price.toString().includes(input)) {
+                        return item;
                     }
-                    else {
-                        alert(rs.ErrDesc);
-                    }
-                },
-                error: function (response) {
-                    alert("Lấy DSSP thất bại");
-                }
-            }
-        );
-    })
-</script>
+                })
+
+                displayProducts(filteredProducts);
+            })
+        })
+    </script>
+
